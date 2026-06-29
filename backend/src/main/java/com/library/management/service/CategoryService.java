@@ -1,18 +1,19 @@
 package com.library.management.service;
 
-import com.library.management.entity.Category;
+import com.library.management.dto.request.CategoryRequest;
+import com.library.management.dto.response.CategoryResponse;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    List<Category> getAllCategories();
+    List<CategoryResponse> getAllCategories();
 
-    Category getCategoryById(Long id);
+    CategoryResponse getCategoryById(Long id);
 
-    Category saveCategory(Category category);
+    CategoryResponse saveCategory(CategoryRequest request);
 
-    Category updateCategory(Long id, Category category);
+    CategoryResponse updateCategory(Long id, CategoryRequest request);
 
     void deleteCategory(Long id);
 
