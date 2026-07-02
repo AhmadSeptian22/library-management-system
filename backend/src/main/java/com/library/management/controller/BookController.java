@@ -7,6 +7,7 @@ import com.library.management.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,8 @@ public class BookController {
     // GET ALL BOOK
     // ===========================
     @GetMapping
-    public ApiResponse<Page<BookResponse>> getAllBooks(Pageable pageable) {
+    public ApiResponse<Page<BookResponse>> getAllBooks(
+            @ParameterObject Pageable pageable) {
 
         return new ApiResponse<>(
                 true,
@@ -96,10 +98,10 @@ public class BookController {
     // ===========================
     // SEARCH BOOK
     // ===========================
-@GetMapping("/search")
-public ApiResponse<Page<BookResponse>> searchBook(
-        @RequestParam String keyword,
-        Pageable pageable) {
+    @GetMapping("/search")
+    public ApiResponse<Page<BookResponse>> searchBook(
+            @RequestParam String keyword,
+            @ParameterObject Pageable pageable) {
 
     return new ApiResponse<>(
             true,

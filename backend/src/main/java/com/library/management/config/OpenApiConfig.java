@@ -19,8 +19,8 @@ public class OpenApiConfig {
                         .description("REST API untuk aplikasi manajemen perpustakaan")
                         .version("1.0.0")
                         .contact(new Contact()
-                                .name("Septian & Adi")
-                                .email("admin@library.com")))
+                                .name("Septian Fawzi")
+                                .email("tianfawzi@gmail.com")))
                 .externalDocs(new ExternalDocumentation()
                         .description("GitHub Repository")
                         .url("https://github.com/AhmadSeptian22/library-management-system"));
