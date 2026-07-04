@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tambah Anggota | LIBMAN</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h2>LIBMAN</h2>
+
+<span>Library Management</span>
+
+</div>
+
+<ul class="menu">
+
+<li>
+
+<a href="tambah-anggota.html" class="btn-primary">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Tambah Anggota
+
+</a>
+
+</li>
+
+<li>
+
+<a href="buku.html">
+
+<i class="fa-solid fa-book"></i>
+
+Buku
+
+</a>
+
+</li>
+
+<li class="active">
+
+<a href="anggota.html">
+
+<i class="fa-solid fa-users"></i>
+
+Anggota
+
+</a>
+
+</li>
+
+<li>
+
+<a href="peminjaman.html">
+
+<i class="fa-solid fa-book-open-reader"></i>
+
+Peminjaman
+
+</a>
+
+</li>
+
+<li>
+
+<a href="pengembalian.html">
+
+<i class="fa-solid fa-arrow-rotate-left"></i>
+
+Pengembalian
+
+</a>
+
+</li>
+
+<li>
+
+<a href="laporan.html">
+
+<i class="fa-solid fa-chart-column"></i>
+
+Laporan
+
+</a>
+
+</li>
+
+</ul>
+
+<div class="logout">
+
+<a href="login.html">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
+
+</div>
+
+</aside>
+
+<!-- ================= CONTENT ================= -->
+
+<main class="content">
+
+<header class="topbar">
+
+<div>
+
+<h1>Tambah Anggota</h1>
+
+<p>Masukkan data anggota perpustakaan.</p>
+
+</div>
+
+<div class="profile">
+
+<img src="images/admin.jpg">
+
+<div>
+
+<h4>Administrator</h4>
+
+<span>Admin Perpustakaan</span>
+
+</div>
+
+</div>
+
+</header>
+
+<div class="form-card">
+
+<h2>Form Tambah Anggota</h2>
+
+<form>
+
+<div class="form-group">
+
+<label>Nama Lengkap</label>
+
+<input
+type="text"
+placeholder="Masukkan Nama Lengkap">
+
+</div>
+
+<div class="form-group">
+
+<label>NIM / NIS</label>
+
+<input
+type="text"
+placeholder="Masukkan NIM">
+
+</div>
+
+<div class="form-group">
+
+<label>Program Studi</label>
+
+<select>
+
+<option>-- Pilih Program Studi --</option>
+
+<option>Teknik Informatika</option>
+
+<option>Sistem Informasi</option>
+
+<option>Manajemen</option>
+
+<option>Akuntansi</option>
+
+<option>Hukum</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+type="email"
+placeholder="contoh@email.com">
+
+</div>
+
+<div class="form-group">
+
+<label>No. HP</label>
+
+<input
+type="text"
+placeholder="08xxxxxxxxxx">
+
+</div>
+
+<div class="form-group">
+
+<label>Alamat</label>
+
+<textarea
+rows="4"
+placeholder="Masukkan Alamat"></textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>Status</label>
+
+<select>
+
+<option>Aktif</option>
+
+<option>Non Aktif</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Foto Anggota</label>
+
+<input
+type="file">
+
+</div>
+
+<div class="button-group">
+
+<button class="btn-primary">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Simpan
+
+</button>
+
+<a href="anggota.html" class="btn-cancel">
+
+Batal
+
+</a>
+
+</div>
+
+</form>
+<!-- ================= INFORMASI TAMBAHAN ================= -->
+
+<div class="form-layout">
+
+    <!-- PREVIEW KARTU -->
+
+    <div class="form-left">
+
+        <div class="upload-box">
+
+            <i class="fa-solid fa-id-card"></i>
+
+            <h3>Preview Kartu Anggota</h3>
+
+            <p>Kartu anggota akan dibuat otomatis setelah data disimpan.</p>
+
+            <div class="member-preview">
+
+                <div class="avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <h3>Nama Anggota</h3>
+
+                <p>NIM : XXXXXXXX</p>
+
+                <p>Program Studi</p>
+
+                <span class="badge success">AKTIF</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- INFORMASI -->
+
+    <div class="form-right">
+
+        <div class="info-card">
+
+            <h3>
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                Informasi
+
+            </h3>
+
+            <hr>
+
+            <ul>
+
+                <li>Nama lengkap wajib diisi.</li>
+
+                <li>NIM tidak boleh sama dengan anggota lain.</li>
+
+                <li>Email digunakan sebagai identitas anggota.</li>
+
+                <li>Nomor HP harus aktif.</li>
+
+                <li>Status menentukan hak peminjaman.</li>
+
+            </ul>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3>
+
+                <i class="fa-solid fa-address-card"></i>
+
+                Hak Anggota
+
+            </h3>
+
+            <hr>
+
+            <p>✓ Meminjam buku</p>
+
+            <p>✓ Melihat riwayat peminjaman</p>
+
+            <p>✓ Mendapat notifikasi jatuh tempo</p>
+
+            <p>✓ Cetak kartu anggota</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
+
+</div>
