@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LIBMAN | Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>LIBMAN</h2>
+
+            <span>Library Management</span>
+
+        </div>
+
+        <ul class="menu">
+
+            <li class="active">
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="buku.html">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    Buku
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="anggota.html">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Anggota
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="peminjaman.html">
+
+                    <i class="fa-solid fa-book-open-reader"></i>
+
+                    Peminjaman
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="pengembalian.html">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Pengembalian
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="laporan.html">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    Laporan
+
+                </a>
+
+            </li>
+
+        </ul>
+
+        <div class="logout">
+
+            <a href="login.html">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="content">
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Dashboard</h1>
+
+                <p>Selamat Datang di Library Management System</p>
+
+            </div>
+
+            <div class="profile">
+
+                <img src="images/admin.jpg" alt="Admin">
+
+                <div>
+
+                    <h4>Administrator</h4>
+
+                    <span>Admin Perpustakaan</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Statistik -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <div>
+
+                    <h3 id="totalBooks">0</h3>
+
+                    <p>Buku</p>
+
+                </div>
+
+                <i class="fa-solid fa-book"></i>
+
+            </div>
+
+            <div class="card">
+
+                <div>
+
+                    <h3 id="totalMembers">0</h3>
+
+                    <p>Anggota</p>
+
+                </div>
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+            <div class="card">
+
+                <div>
+
+                    <h3 id="totalBorrowings">0</h3>
+                    
+                    <p>Peminjaman</p>
+
+                </div>
+
+                <i class="fa-solid fa-book-open-reader"></i>
+
+            </div>
+
+            <div class="card">
+
+                <div>
+
+                    <h3 id="totalReturns">0</h3>
+
+                    <p>Terlambat</p>
+
+                </div>
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+            </div>
+
+        </section>
+
+        <!-- Statistik Cepat -->
+
+        <section class="overview">
+
+            <div class="overview-box">
+
+                <h3>Informasi Sistem</h3>
+
+                <hr>
+
+                <p><strong>Nama Aplikasi :</strong> LIBMAN</p>
+
+                <p><strong>Versi :</strong> 1.0</p>
+
+                <p><strong>Status :</strong> Aktif</p>
+
+                <p><strong>Developer :</strong> Adi & Septian</p>
+
+            </div>
+
+            <div class="overview-box">
+
+                <h3>Aktivitas Hari Ini</h3>
+
+                <hr>
+
+                <p>📖 Buku Dipinjam : <b>12</b></p>
+
+                <p>📦 Buku Dikembalikan : <b>9</b></p>
+
+                <p>👤 Anggota Baru : <b>3</b></p>
+
+                <p>📚 Buku Baru : <b>7</b></p>
+
+            </div>
+
+        </section>
+
+        <!-- Tabel Aktivitas -->

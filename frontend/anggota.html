@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LIBMAN | Anggota</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h2>LIBMAN</h2>
+
+        <span>Library Management</span>
+
+    </div>
+
+    <ul class="menu">
+
+        <li>
+
+            <a href="dashboard.html">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="buku.html">
+
+                <i class="fa-solid fa-book"></i>
+
+                Buku
+
+            </a>
+
+        </li>
+
+        <li class="active">
+
+            <a href="anggota.html">
+
+                <i class="fa-solid fa-users"></i>
+
+                Anggota
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="peminjaman.html">
+
+                <i class="fa-solid fa-book-open-reader"></i>
+
+                Peminjaman
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="pengembalian.html">
+
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+
+                Pengembalian
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="laporan.html">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                Laporan
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    <div class="logout">
+
+        <a href="login.html">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</aside>
+
+<!-- ================= CONTENT ================= -->
+
+<main class="content">
+
+<header class="topbar">
+
+    <div>
+
+        <h1>Manajemen Anggota</h1>
+
+        <p>Kelola seluruh data anggota perpustakaan.</p>
+
+    </div>
+
+    <div class="profile">
+
+        <img src="images/admin.jpg" alt="Admin">
+
+        <div>
+
+            <h4>Administrator</h4>
+
+            <span>Admin Perpustakaan</span>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ================= CARD ================= -->
+
+<section class="cards">
+
+    <div class="card">
+
+        <div>
+
+            <h2>5</h2>
+
+            <p>Total Anggota</p>
+
+        </div>
+
+        <i class="fa-solid fa-users"></i>
+
+    </div>
+
+    <div class="card">
+
+        <div>
+
+            <h2>5</h2>
+
+            <p>Anggota Aktif</p>
+
+        </div>
+
+        <i class="fa-solid fa-user-check"></i>
+
+    </div>
+
+    <div class="card">
+
+        <div>
+
+            <h2>3</h2>
+
+            <p>Anggota Baru</p>
+
+        </div>
+
+        <i class="fa-solid fa-user-plus"></i>
+
+    </div>
+
+    <div class="card">
+
+        <div>
+
+            <h2>0</h2>
+
+            <p>Non Aktif</p>
+
+        </div>
+
+        <i class="fa-solid fa-user-xmark"></i>
+
+    </div>
+
+</section>
+
+<!-- ================= TABEL ================= -->
+
+<section class="table-card">
+
+<div class="table-header">
+
+<h3>Daftar Anggota</h3>
+
+<a href="tambah-anggota.html" class="btn-primary">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Tambah Anggota
+
+</a>
+
+</div>
+
+<div class="search-area">
+
+<input
+
+type="text"
+
+placeholder="Cari Nama / NIM / Email">
+
+<button class="btn-primary">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Cari
+
+</button>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Nama</th>
+
+<th>NIM</th>
+
+<th>Program Studi</th>
+
+<th>No HP</th>
+
+<th>Status</th>
+
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+
+<td>AG001</td>
+
+<td>Adi</td>
+
+<td>23110088</td>
+
+<td>Teknik Informatika</td>
+
+<td>089666389529</td>
+
+<td>
+
+<span class="badge success">
+
+Aktif
+
+</span>
+
+</td>
+
+<td>
+
+<a href="edit-anggota.html" class="btn-edit">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<button class="btn-delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>AG002</td>
+
+<td>Septian</td>
+
+<td>22</td>
+
+<td>Sistem Informasi</td>
+
+<td>087733887692</td>
+
+<td>
+
+<span class="badge success">
+
+Aktif
+
+</span>
+
+</td>
+
+<td>
+
+<a href="edit-anggota.html" class="btn-edit">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<button class="btn-delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>AG004</td>
+
+<td>Hakam</td>
+
+<td>23</td>
+
+<td>Management</td>
+
+<td>083823928039</td>
+
+<td>
+
+<span class="badge success">
+
+Aktif
+
+</span>
+
+</td>
+
+<td>
+
+<a href="edit-anggota.html" class="btn-edit">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<button class="btn-delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>AG005</td>
+
+<td>Reinna</td>
+
+<td>23110086</td>
+
+<td>Akuntansi</td>
+
+<td>08872922420</td>
+
+<td>
+
+<span class="badge success">
+
+Aktif
+
+</span>
+
+</td>
+
+<td>
+
+<a href="edit-anggota.html" class="btn-edit">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<button class="btn-delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>AG006</td>
+
+<td>Ikhsan</td>
+
+<td>23110097</td>
+
+<td>Hukum</td>
+
+<td>085846134705</td>
+
+<td>
+
+<span class="badge success">
+
+Aktif
+
+</span>
+
+</td>
+
+<td>
+
+<a href="edit-anggota.html" class="btn-edit">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<button class="btn-delete">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<footer class="footer">
+
+<p>
+
+© 2026 LIBMAN - Library Management System
+
+</p>
+
+</footer>
+
+</main>
+
+</div>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
