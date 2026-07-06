@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 
+
 <head>
 
     <meta charset="UTF-8">
@@ -108,17 +109,17 @@
 
         </ul>
 
-        <div class="logout">
+<div class="logout">
 
-            <a href="login.html">
+    <a href="#" onclick="logout()">
 
-                <i class="fa-solid fa-right-from-bracket"></i>
+        <i class="fa-solid fa-right-from-bracket"></i>
 
-                Logout
+        Logout
 
-            </a>
+    </a>
 
-        </div>
+</div>
 
     </aside>
 
@@ -232,7 +233,7 @@
 
                 <p><strong>Status :</strong> Aktif</p>
 
-                <p><strong>Developer :</strong> Adi & Septian</p>
+                <p><strong>Developer :</strong> Adi & Fawzi</p>
 
             </div>
 
@@ -253,5 +254,33 @@
             </div>
 
         </section>
+        <script>
+
+// ============================
+// CEK LOGIN
+// ============================
+
+const token = localStorage.getItem("token");
+
+if (!token) {
+    window.location.href = "login.html";
+}
+
+// ============================
+// LOGOUT
+// ============================
+
+function logout() {
+
+    localStorage.removeItem("token");
+
+    window.location.href = "login.html";
+
+}
+
+</script>
+
+</body>
+</html>
 
         <!-- Tabel Aktivitas -->

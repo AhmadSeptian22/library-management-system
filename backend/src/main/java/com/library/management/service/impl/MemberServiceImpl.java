@@ -28,6 +28,8 @@ public class MemberServiceImpl implements MemberService {
         return new MemberResponse(
                 member.getId(),
                 member.getFullName(),
+                member.getNim(),
+                member.getStudyProgram(),
                 member.getEmail(),
                 member.getPhone(),
                 member.getAddress(),
@@ -77,6 +79,8 @@ public class MemberServiceImpl implements MemberService {
         Member member = new Member();
 
         member.setFullName(request.getFullName());
+        member.setNim(request.getNim());
+        member.setStudyProgram(request.getStudyProgram());
         member.setEmail(request.getEmail());
         member.setPhone(request.getPhone());
         member.setAddress(request.getAddress());
@@ -108,6 +112,8 @@ public class MemberServiceImpl implements MemberService {
         }
 
         member.setFullName(request.getFullName());
+        member.setNim(request.getNim());
+        member.setStudyProgram(request.getStudyProgram());
         member.setEmail(request.getEmail());
         member.setPhone(request.getPhone());
         member.setAddress(request.getAddress());

@@ -156,7 +156,7 @@ Logout
 
 <h2>Form Tambah Buku</h2>
 
-<form>
+<form id="bookForm">
 
 <div class="form-group">
 
@@ -164,7 +164,9 @@ Logout
 
 <input
 type="text"
-placeholder="Masukkan Judul Buku">
+id="title"
+placeholder="Masukkan Judul Buku"
+required>
 
 </div>
 
@@ -174,7 +176,9 @@ placeholder="Masukkan Judul Buku">
 
 <input
 type="text"
-placeholder="Nama Penulis">
+id="author"
+placeholder="Nama Penulis"
+required>
 
 </div>
 
@@ -184,7 +188,9 @@ placeholder="Nama Penulis">
 
 <input
 type="text"
-placeholder="Nama Penerbit">
+id="publisher"
+placeholder="Nama Penerbit"
+required>
 
 </div>
 
@@ -194,7 +200,9 @@ placeholder="Nama Penerbit">
 
 <input
 type="number"
-placeholder="2026">
+id="publicationYear"
+placeholder="2026"
+required>
 
 </div>
 
@@ -202,21 +210,9 @@ placeholder="2026">
 
 <label>Kategori</label>
 
-<select>
+<select id="categoryId" required>
 
-<option>-- Pilih Kategori --</option>
-
-<option>Pemrograman</option>
-
-<option>Teknologi</option>
-
-<option>Basis Data</option>
-
-<option>Frontend</option>
-
-<option>Backend</option>
-
-<option>UI / UX</option>
+<option value="">-- Pilih Kategori --</option>
 
 </select>
 
@@ -228,7 +224,9 @@ placeholder="2026">
 
 <input
 type="text"
-placeholder="978xxxxxxxx">
+id="isbn"
+placeholder="978xxxxxxxx"
+required>
 
 </div>
 
@@ -238,21 +236,12 @@ placeholder="978xxxxxxxx">
 
 <input
 type="number"
-placeholder="10">
+id="stock"
+placeholder="10"
+required>
 
 </div>
-
-<div class="form-group">
-
-<label>Deskripsi</label>
-
-<textarea
-rows="5"
-placeholder="Deskripsi Buku"></textarea>
-
-</div>
-
-<button id="addBookBtn" class="btn-primary">
+<button type="submit" class="btn-primary">
 
 <i class="fa-solid fa-plus"></i>
 
@@ -276,7 +265,8 @@ Batal
 
 </div>
 
-<script src="js/app.js"></script>
+<script src="js/api.js"></script>
+<script src="js/add-book.js"></script>
 
 </body>
 

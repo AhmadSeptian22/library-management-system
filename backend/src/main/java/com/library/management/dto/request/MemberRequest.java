@@ -10,6 +10,14 @@ public class MemberRequest {
     @Size(max = 100)
     private String fullName;
 
+    @NotBlank(message = "NIM wajib diisi")
+    @Size(max = 20)
+    private String nim;
+
+    @NotBlank(message = "Program studi wajib diisi")
+    @Size(max = 100)
+    private String studyProgram;
+
     @NotBlank(message = "Email wajib diisi")
     @Email(message = "Format email tidak valid")
     private String email;
@@ -33,6 +41,22 @@ public class MemberRequest {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+
+    public String getStudyProgram() {
+        return studyProgram;
+    }
+
+    public void setStudyProgram(String studyProgram) {
+        this.studyProgram = studyProgram;
     }
 
     public String getEmail() {
@@ -66,5 +90,4 @@ public class MemberRequest {
     public void setActive(Boolean active) {
         this.active = active;
     }
-
 }

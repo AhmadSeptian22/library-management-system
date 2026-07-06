@@ -169,27 +169,56 @@
 
 <script>
 
-function login(event){
+async function login(event){
 
     event.preventDefault();
 
-    let username=document.getElementById("username").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-    let password=document.getElementById("password").value;
+    try{
 
-    if(username=="admin" && password=="123"){
+        const response = await fetch("http://localhost:8080/api/auth/login",{
 
-        window.location.href="dashboard.html";
+            method:"POST",
 
-    }else{
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-        alert("Username atau Password Salah");
+            body:JSON.stringify({
+
+                username:username,
+                password:password
+
+            })
+
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+
+            localStorage.setItem("token",result.data.token);
+
+            window.location.href="dashboard.html";
+
+        }else{
+
+            alert(result.message);
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Backend tidak dapat dihubungi.");
 
     }
 
 }
 
 </script>
-
 </body>
 </html>

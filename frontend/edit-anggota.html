@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Edit Anggota | LIBMAN</title>
+<title>Edit  Anggota | LIBMAN</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -36,11 +36,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <li>
 
-<a href="dashboard.html">
+<a href="tambah-anggota.html" class="btn-primary">
 
-<i class="fa-solid fa-house"></i>
+<i class="fa-solid fa-user-plus"></i>
 
-Dashboard
+Tambah Anggota
 
 </a>
 
@@ -132,7 +132,7 @@ Logout
 
 <h1>Edit Anggota</h1>
 
-<p>Perbarui informasi anggota perpustakaan.</p>
+<p>Perbaharui Data Anggota Perpustakaan.</p>
 
 </div>
 
@@ -156,18 +156,7 @@ Logout
 
 <h2>Form Edit Anggota</h2>
 
-<form>
-
-<div class="form-group">
-
-<label>ID Anggota</label>
-
-<input
-type="text"
-value="AG001"
-readonly>
-
-</div>
+<form id="memberForm">
 
 <div class="form-group">
 
@@ -175,7 +164,9 @@ readonly>
 
 <input
 type="text"
-value="Adi Suryadi">
+id="fullName"
+placeholder="Masukkan Nama Lengkap"
+required>
 
 </div>
 
@@ -185,7 +176,9 @@ value="Adi Suryadi">
 
 <input
 type="text"
-value="221011001">
+id="nim"
+placeholder="Masukkan NIM"
+required>
 
 </div>
 
@@ -193,19 +186,11 @@ value="221011001">
 
 <label>Program Studi</label>
 
-<select>
-
-<option>Teknik Informatika</option>
-
-<option>Sistem Informasi</option>
-
-<option>Manajemen</option>
-
-<option>Akuntansi</option>
-
-<option>Hukum</option>
-
-</select>
+<input
+type="text"
+id="studyProgram"
+placeholder="Masukkan Program Studi"
+required>
 
 </div>
 
@@ -215,17 +200,21 @@ value="221011001">
 
 <input
 type="email"
-value="adi@email.com">
+id="email"
+placeholder="contoh@email.com"
+required>
 
 </div>
 
 <div class="form-group">
 
-<label>No HP</label>
+<label>No. HP</label>
 
 <input
 type="text"
-value="081234567890">
+id="phone"
+placeholder="08xxxxxxxxxx"
+required>
 
 </div>
 
@@ -233,39 +222,55 @@ value="081234567890">
 
 <label>Alamat</label>
 
-<textarea rows="4">Jl. Merdeka No.10 Jakarta</textarea>
+<textarea
+id="address"
+rows="4"
+placeholder="Masukkan Alamat"
+required></textarea>
 
 </div>
 
 <div class="form-group">
 
-<label>Status</label>
+    <label>Status</label>
 
-<select>
+    <div class="status-option">
 
-<option selected>Aktif</option>
+        <label class="status-card">
 
-<option>Non Aktif</option>
+            <input
+                type="radio"
+                name="active"
+                value="true"
+                checked>
 
-</select>
+            <span>Aktif</span>
 
-</div>
+        </label>
 
-<div class="form-group">
+        <label class="status-card">
 
-<label>Ganti Foto</label>
+            <input
+                type="radio"
+                name="active"
+                value="false">
 
-<input type="file">
+            <span>Non Aktif</span>
 
-</div>
+        </label>
+
+    </div>
+</label>
 
 <div class="button-group">
 
-<button class="btn-primary">
+<button
+type="submit"
+class="btn-primary">
 
 <i class="fa-solid fa-floppy-disk"></i>
 
-Update Data
+Update Aggota
 
 </button>
 
@@ -278,21 +283,21 @@ Batal
 </div>
 
 </form>
-<!-- ================= LAYOUT INFORMASI ================= -->
+<!-- ================= INFORMASI TAMBAHAN ================= -->
 
 <div class="form-layout">
 
-    <!-- KIRI -->
+    <!-- PREVIEW KARTU -->
 
     <div class="form-left">
 
         <div class="upload-box">
 
-            <i class="fa-solid fa-user-pen"></i>
+            <i class="fa-solid fa-id-card"></i>
 
-            <h3>Profil Anggota</h3>
+            <h3>Preview Kartu Anggota</h3>
 
-            <p>Foto anggota yang sedang terdaftar.</p>
+            <p>Kartu anggota akan dibuat otomatis setelah data disimpan.</p>
 
             <div class="member-preview">
 
@@ -302,17 +307,13 @@ Batal
 
                 </div>
 
-                <h3>Adi Suryadi</h3>
+                <h3>Nama Anggota</h3>
 
-                <p>ID : AG001</p>
+                <p>NIM : XXXXXXXX</p>
 
-                <p>Teknik Informatika</p>
+                <p>Program Studi</p>
 
-                <span class="badge success">
-
-                    AKTIF
-
-                </span>
+                <span class="badge success">AKTIF</span>
 
             </div>
 
@@ -320,7 +321,7 @@ Batal
 
     </div>
 
-    <!-- KANAN -->
+    <!-- INFORMASI -->
 
     <div class="form-right">
 
@@ -330,53 +331,25 @@ Batal
 
                 <i class="fa-solid fa-circle-info"></i>
 
-                Informasi Anggota
+                Informasi
 
             </h3>
 
             <hr>
 
-            <table class="info-table">
+            <ul>
 
-                <tr>
+                <li>Nama lengkap wajib diisi.</li>
 
-                    <td>ID Anggota</td>
+                <li>NIM tidak boleh sama dengan anggota lain.</li>
 
-                    <td>:</td>
+                <li>Email digunakan sebagai identitas anggota.</li>
 
-                    <td>AG001</td>
+                <li>Nomor HP harus aktif.</li>
 
-                </tr>
+                <li>Status menentukan hak peminjaman.</li>
 
-                <tr>
-
-                    <td>Tanggal Daftar</td>
-
-                    <td>:</td>
-
-                    <td>20 Januari 2026</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>Status</td>
-
-                    <td>:</td>
-
-                    <td>
-
-                        <span class="badge success">
-
-                            Aktif
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-            </table>
+            </ul>
 
         </div>
 
@@ -384,77 +357,21 @@ Batal
 
             <h3>
 
-                <i class="fa-solid fa-book"></i>
+                <i class="fa-solid fa-address-card"></i>
 
-                Riwayat Peminjaman
-
-            </h3>
-
-            <hr>
-
-            <table class="history-table">
-
-                <tr>
-
-                    <th>Buku</th>
-
-                    <th>Status</th>
-
-                </tr>
-
-                <tr>
-
-                    <td>Java Programming</td>
-
-                    <td>
-
-                        <span class="badge success">
-
-                            Kembali
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>Spring Boot</td>
-
-                    <td>
-
-                        <span class="badge warning">
-
-                            Dipinjam
-
-                        </span>
-
-                    </td>
-
-                </tr>
-
-            </table>
-
-        </div>
-
-        <div class="info-card">
-
-            <h3>
-
-                <i class="fa-solid fa-chart-line"></i>
-
-                Statistik
+                Hak Anggota
 
             </h3>
 
             <hr>
 
-            <p>Total Peminjaman : <b>12 Buku</b></p>
+            <p>✓ Meminjam buku</p>
 
-            <p>Sedang Dipinjam : <b>1 Buku</b></p>
+            <p>✓ Melihat riwayat peminjaman</p>
 
-            <p>Keterlambatan : <b>0 Kali</b></p>
+            <p>✓ Mendapat notifikasi jatuh tempo</p>
+
+            <p>✓ Cetak kartu anggota</p>
 
         </div>
 
@@ -466,8 +383,11 @@ Batal
 
 </div>
 
-<script src="js/app.js"></script>
+<script src="js/api.js"></script>
+<script src="js/edit-member.js"></script>
 
 </body>
 
 </html>
+
+</div>

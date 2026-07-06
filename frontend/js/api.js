@@ -11,15 +11,34 @@ const BASE_URL = "http://localhost:8080/api";
 
 async function request(url, method = "GET", data = null) {
 
+    const token = localStorage.getItem("token");
+
     const options = {
+
         method: method,
+
         headers: {
+
             "Content-Type": "application/json"
+
         }
+
     };
 
+    if (token) {
+
+        options.headers["Authorization"] = "Bearer " + token;
+
+    }
+
+    // ===============================
+    // KIRIM BODY KE BACKEND
+    // ===============================
+
     if (data !== null) {
+
         options.body = JSON.stringify(data);
+
     }
 
     try {
@@ -27,7 +46,9 @@ async function request(url, method = "GET", data = null) {
         const response = await fetch(BASE_URL + url, options);
 
         if (!response.ok) {
+
             throw new Error("HTTP Error : " + response.status);
+
         }
 
         return await response.json();
@@ -37,8 +58,11 @@ async function request(url, method = "GET", data = null) {
         console.error("API ERROR :", error);
 
         return {
+
             success: false,
+
             message: error.message
+
         };
 
     }
@@ -313,31 +337,52 @@ async function getMembers(page = 0, size = 20) {
 
 }
 
+// ====================================
+// MEMBER API
+// ====================================
+
+async function getMembers(page = 0, size = 20){
+
+    return await request(
+        `/members?page=${page}&size=${size}`
+    );
+
+}
 // Ambil satu anggota
-async function getMember(id) {
+async function getMemberById(id){
 
-    return await request("/members/" + id);
-
-}
-
-// Tambah anggota
-async function addMember(member) {
-
-    return await request("/members", "POST", member);
+    return await request(
+        "/members/" + id
+    );
 
 }
+// tambah anggota
+async function createMember(member){
 
-// Update anggota
-async function updateMember(id, member) {
-
-    return await request("/members/" + id, "PUT", member);
+    return await request(
+        "/members",
+        "POST",
+        member
+    );
 
 }
+//update anggota
+async function updateMember(id, member){
 
-// Hapus anggota
-async function deleteMember(id) {
+    return await request(
+        "/members/" + id,
+        "PUT",
+        member
+    );
 
-    return await request("/members/" + id, "DELETE");
+}
+//haspus anggota
+async function deleteMember(id){
+
+    return await request(
+        "/members/" + id,
+        "DELETE"
+    );
 
 }
 
@@ -970,6 +1015,25 @@ function formatCurrency(value){
         currency:"IDR"
 
     }).format(value);
+
+}
+async function getCategories(){
+
+    return await request("/categories");
+
+}
+async function getBookById(id){
+
+    return await request(`/books/${id}`);
+
+}
+async function updateBook(id, book){
+
+    return await request(
+        `/books/${id}`,
+        "PUT",
+        book
+    );
 
 }
 

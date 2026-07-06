@@ -34,14 +34,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <ul class="menu">
 
-<li>
+  <li>
 
-<a href="tambah-buku.html" class="btn-primary">
-    <i class="fa-solid fa-plus"></i>
-    Tambah Buku
-</a>
+            <a href="dashboard.html">
 
-</li>
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+        </li>
 
 <li class="active">
 
@@ -216,15 +219,10 @@ Logout
 <div class="table-header">
 
 <h3>Daftar Buku</h3>
-
-<button class="btn-primary">
-
-<i class="fa-solid fa-plus"></i>
-
-Tambah Buku
-
-</button>
-
+<a href="tambah-buku.html" class="btn-primary">
+    <i class="fa-solid fa-plus"></i>
+    Tambah Buku
+</a>
 </div>
 
 <div class="search-area">
@@ -263,279 +261,7 @@ Cari
 
 </thead>
 
-<tbody>
-    <tr>
-
-    <td>BK001</td>
-
-    <td>Clean Code</td>
-
-    <td>Robert C. Martin</td>
-
-    <td>Pemrograman</td>
-
-    <td>12</td>
-
-    <td>
-
-        <button class="edit-btn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit
-
-        </button>
-
-        <button class="delete-btn">
-
-            <i class="fa-solid fa-trash"></i>
-
-            Hapus
-
-        </button>
-
-    </td>
-
-</tr>
-
-<tr>
-
-    <td>BK002</td>
-
-    <td>Atomic Habits</td>
-
-    <td>James Clear</td>
-
-    <td>Motivasi</td>
-
-    <td>8</td>
-
-    <td>
-
-        <button class="edit-btn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit
-
-        </button>
-
-        <button class="delete-btn">
-
-            <i class="fa-solid fa-trash"></i>
-
-            Hapus
-
-        </button>
-
-    </td>
-
-</tr>
-
-<tr>
-
-    <td>BK003</td>
-
-    <td>Basis Data</td>
-
-    <td>Rosa & Shalahuddin</td>
-
-    <td>Teknologi</td>
-
-    <td>15</td>
-
-    <td>
-
-        <button class="edit-btn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit
-
-        </button>
-
-        <button class="delete-btn">
-
-            <i class="fa-solid fa-trash"></i>
-
-            Hapus
-
-        </button>
-
-    </td>
-
-</tr>
-
-<tr>
-
-    <td>BK004</td>
-
-    <td>Pemrograman Java</td>
-
-    <td>Herbert Schildt</td>
-
-    <td>Pemrograman</td>
-
-    <td>6</td>
-
-    <td>
-
-        <button class="edit-btn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit
-
-        </button>
-
-        <button class="delete-btn">
-
-            <i class="fa-solid fa-trash"></i>
-
-            Hapus
-
-        </button>
-
-    </td>
-
-</tr>
-
-<tr>
-
-    <td>BK005</td>
-
-    <td>UI/UX Design</td>
-
-    <td>Don Norman</td>
-
-    <td>Desain</td>
-
-    <td>20</td>
-
-    <td>
-
-        <button class="edit-btn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit
-
-        </button>
-
-        <button class="delete-btn">
-
-            <i class="fa-solid fa-trash"></i>
-
-            Hapus
-
-        </button>
-
-    </td>
-
-</tr>
-
-<tr>
-
-    <td>BK006</td>
-
-    <td>Laravel 12</td>
-
-    <td>Taylor Otwell</td>
-
-    <td>Framework</td>
-
-    <td>10</td>
-
-    <td>
-
-        <button class="edit-btn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit
-
-        </button>
-
-        <button class="delete-btn">
-
-            <i class="fa-solid fa-trash"></i>
-
-            Hapus
-
-        </button>
-
-    </td>
-
-</tr>
-
-<tr>
-
-    <td>BK007</td>
-
-    <td>Spring Boot</td>
-
-    <td>Craig Walls</td>
-
-    <td>Backend</td>
-
-    <td>9</td>
-
-    <td>
-
-        <button class="edit-btn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit
-
-        </button>
-
-        <button class="delete-btn">
-
-            <i class="fa-solid fa-trash"></i>
-
-            Hapus
-
-        </button>
-
-    </td>
-
-</tr>
-
-<tr>
-
-    <td>BK008</td>
-
-    <td>HTML CSS JavaScript</td>
-
-    <td>Jon Duckett</td>
-
-    <td>Frontend</td>
-
-    <td>18</td>
-
-    <td>
-
-        <button class="edit-btn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit
-
-        </button>
-
-        <button class="delete-btn">
-
-            <i class="fa-solid fa-trash"></i>
-
-            Hapus
-
-        </button>
-
-    </td>
-
-</tr>
-
+<tbody id="bookTableBody">
 </tbody>
 
 </table>
@@ -556,8 +282,8 @@ Cari
 
 </div>
 
-<script src="js/app.js"></script>
+<script src="js/api.js"></script>
+<script src="js/book.js"></script>
 
 </body>
-
 </html>

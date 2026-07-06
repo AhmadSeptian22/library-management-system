@@ -6,6 +6,8 @@ public class MemberResponse {
 
     private Long id;
     private String fullName;
+    private String nim;
+    private String studyProgram;
     private String email;
     private String phone;
     private String address;
@@ -19,6 +21,8 @@ public class MemberResponse {
     public MemberResponse(
             Long id,
             String fullName,
+            String nim,
+            String studyProgram,
             String email,
             String phone,
             String address,
@@ -28,6 +32,8 @@ public class MemberResponse {
 
         this.id = id;
         this.fullName = fullName;
+        this.nim = nim;
+        this.studyProgram = studyProgram;
         this.email = email;
         this.phone = phone;
         this.address = address;
@@ -42,6 +48,14 @@ public class MemberResponse {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public String getStudyProgram() {
+        return studyProgram;
     }
 
     public String getEmail() {
@@ -68,4 +82,47 @@ public class MemberResponse {
         return updatedAt;
     }
 
+    // ==========================
+    // Setter
+    // ==========================
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+
+    public void setStudyProgram(String studyProgram) {
+        this.studyProgram = studyProgram;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

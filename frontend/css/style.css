@@ -2027,3 +2027,87 @@ cursor:pointer;
 background:#000;
 
 }
+/* ===========================
+   MEMBER STATUS
+=========================== */
+
+.status-active{
+    display:inline-block;
+    padding:6px 16px;
+    border-radius:20px;
+    background:#28a745;
+    color:#fff;
+    font-weight:600;
+    font-size:14px;
+    text-align:center;
+}
+
+.status-inactive{
+    display:inline-block;
+    padding:6px 16px;
+    border-radius:20px;
+    background:#dc3545;
+    color:#fff;
+    font-weight:600;
+    font-size:14px;
+    text-align:center;
+}
+.action-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.edit-btn,
+.delete-btn{
+    width:38px;
+    height:38px;
+    border-radius:8px;
+}
+
+/* ===========================
+   STATUS RADIO CARD
+=========================== */
+
+.status-option{
+    display:flex;
+    gap:15px;
+    margin-top:10px;
+}
+
+.status-card{
+    flex:1;
+    border:1px solid #d6d6d6;
+    border-radius:10px;
+    padding:18px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    transition:.25s;
+}
+.status-card{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+}
+
+.status-card:hover{
+    border-color:#2563eb;
+}
+
+.status-card input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.status-card:has(input:checked){
+    border:5px solid #2563eb;
+    background:#eff6ff;
+}
+
+.status-card span{
+    font-weight:600;
+}
