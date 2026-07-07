@@ -168,19 +168,15 @@ Identitas Anggota
 
 </div>
 
-<div class="search-member">
+<div class="form-group">
 
-<input
-type="text"
-placeholder="Masukkan ID Anggota atau Nama Anggota">
+    <label>Pilih Anggota</label>
 
-<button class="btn-primary">
+    <select id="memberSelect">
 
-<i class="fa-solid fa-magnifying-glass"></i>
+        <option value="">-- Pilih Anggota --</option>
 
-Cari
-
-</button>
+    </select>
 
 </div>
 
@@ -194,21 +190,25 @@ Cari
 
 <div class="member-detail">
 
-<h3>Adi Suryadi</h3>
+    <h3 id="memberName">-</h3>
 
-<p>ID Anggota : AG001</p>
+    <p>NIM : <span id="memberNim">-</span></p>
 
-<p>Program Studi : Teknik Informatika</p>
+    <p>Program Studi : <span id="memberStudy">-</span></p>
 
-<p>Status :
+    <p>
 
-<span class="badge success">
+        Status :
 
-Aktif
+        <span
+            id="memberStatus"
+            class="badge success">
 
-</span>
+            -
 
-</p>
+        </span>
+
+    </p>
 
 </div>
 
@@ -225,18 +225,29 @@ Aktif
 <div class="report-card">
 
 <h3>
-
-<i class="fa-solid fa-book"></i>
-
-Daftar Buku yang Dipinjam
-
+    <i class="fa-solid fa-book"></i>
+    Daftar Buku yang Dipinjam
 </h3>
 
-<button class="btn-primary">
+<div class="form-group">
 
-<i class="fa-solid fa-plus"></i>
+    <label>Pilih Buku</label>
 
-Tambah Buku
+    <select id="bookSelect">
+
+        <option value="">-- Pilih Buku --</option>
+
+    </select>
+
+</div>
+
+<button
+    class="btn-primary"
+    onclick="addBook()">
+
+    <i class="fa-solid fa-plus"></i>
+
+    Tambah Buku
 
 </button>
 
@@ -248,66 +259,19 @@ Tambah Buku
 
 <tr>
 
-<th>No</th>
-
 <th>Judul Buku</th>
 
 <th>Kategori</th>
 
-<th>Rak</th>
+<th>Stok</th>
 
 <th>Aksi</th>
 
 </tr>
 
 </thead>
-
+<tbody id="loanBookBody"></tbody>
 <tbody>
-
-<tr>
-
-<td>1</td>
-
-<td>Java Programming</td>
-
-<td>Pemrograman</td>
-
-<td>A-01</td>
-
-<td>
-
-<button class="btn-danger">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>2</td>
-
-<td>Spring Boot</td>
-
-<td>Framework</td>
-
-<td>B-03</td>
-
-<td>
-
-<button class="btn-danger">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
-
-</tr>
-
 </tbody>
 
 </table>
@@ -341,7 +305,7 @@ Ringkasan Transaksi
 
 <label>Total Buku</label>
 
-<h2>2</h2>
+<h2 id="totalBook">0</h2>
 
 </div>
 
@@ -349,15 +313,18 @@ Ringkasan Transaksi
 
 <label>Tanggal Pinjam</label>
 
-<input type="date" value="2026-06-30">
-
+<input
+    type="date"
+    id="loanDate">
 </div>
 
 <div class="summary-item">
 
 <label>Tanggal Kembali</label>
 
-<input type="date" value="2026-07-07">
+<input
+    type="date"
+    id="dueDate">
 
 </div>
 
@@ -388,17 +355,14 @@ placeholder="Tambahkan catatan jika diperlukan..."></textarea>
 
 <hr>
 
-<button class="btn-primary btn-full">
-
-<i class="fa-solid fa-check"></i>
+<button
+type="button"
+class="btn-primary"
+onclick="saveLoan()">
 
 Proses Peminjaman
 
 </button>
-
-<br><br>
-
-<button class="btn-danger btn-full">
 
 <i class="fa-solid fa-xmark"></i>
 
@@ -513,51 +477,51 @@ Panduan Peminjaman
 
 <div id="bookModal" class="modal">
 
-<div class="modal-content">
+    <div class="modal-content">
 
-<span class="close">&times;</span>
+        <span class="close">&times;</span>
 
-<h2>Tambah Buku</h2>
+        <h2>Tambah Buku</h2>
 
-<br>
+        <br>
 
-<label>Judul Buku</label>
+        <label>Judul Buku</label>
 
-<input
-type="text"
-id="judulBuku"
-placeholder="Masukkan Judul Buku">
+        <input
+            type="text"
+            id="judulBuku"
+            placeholder="Masukkan Judul Buku">
 
-<br><br>
+        <br><br>
 
-<label>Kategori</label>
+        <label>Kategori</label>
 
-<input
-type="text"
-id="kategoriBuku"
-placeholder="Kategori">
+        <input
+            type="text"
+            id="kategoriBuku"
+            placeholder="Kategori">
 
-<br><br>
+        <br><br>
 
-<label>Kode Rak</label>
+        <label>Kode Rak</label>
 
-<input
-type="text"
-id="rakBuku"
-placeholder="Contoh A-01">
+        <input
+            type="text"
+            id="rakBuku"
+            placeholder="Contoh A-01">
 
-<br><br>
+        <br><br>
 
-<button id="saveBook" class="btn-primary">
+        <button id="saveBook" class="btn-primary">
+            Tambah
+        </button>
 
-Tambah
-
-</button>
+    </div>
 
 </div>
 
-<script src="js/app.js"></script>
+<script src="js/api.js"></script>
+<script src="js/loan.js"></script>
 
 </body>
-
 </html>

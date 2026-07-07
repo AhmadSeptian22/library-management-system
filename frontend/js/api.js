@@ -1036,5 +1036,26 @@ async function updateBook(id, book){
     );
 
 }
+// ===============================
+// LOAN
+// ===============================
+
+async function createLoan(data) {
+
+    return await request("/loans", "POST", data);
+
+}
+
+async function getLoans() {
+
+    return await request("/loans");
+
+}
+
+async function returnLoan(id) {
+
+    return await request(`/loans/${id}/return`, "PUT");
+
+}
 
 console.log("LIBMAN API Loaded Successfully");

@@ -3,16 +3,15 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengembalian Buku | LIBMAN</title>
 
-<title>Pengembalian Buku | LIBMAN</title>
+    <link rel="stylesheet" href="css/style.css">
 
-<link rel="stylesheet" href="css/style.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -24,101 +23,63 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <aside class="sidebar">
 
-<div class="logo">
+    <div class="logo">
+        <h2>LIBMAN</h2>
+        <span>Library Management</span>
+    </div>
 
-<h2>LIBMAN</h2>
+    <ul class="menu">
 
-<span>Library Management</span>
+        <li>
+            <a href="dashboard.html">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+        </li>
 
-</div>
+        <li>
+            <a href="buku.html">
+                <i class="fa-solid fa-book"></i>
+                Buku
+            </a>
+        </li>
 
-<ul class="menu">
+        <li>
+            <a href="anggota.html">
+                <i class="fa-solid fa-users"></i>
+                Anggota
+            </a>
+        </li>
 
-<li>
+        <li>
+            <a href="peminjaman.html">
+                <i class="fa-solid fa-book-open-reader"></i>
+                Peminjaman
+            </a>
+        </li>
 
-<a href="dashboard.html">
+        <li class="active">
+            <a href="pengembalian.html">
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+                Pengembalian
+            </a>
+        </li>
 
-<i class="fa-solid fa-house"></i>
+        <li>
+            <a href="laporan.html">
+                <i class="fa-solid fa-chart-column"></i>
+                Laporan
+            </a>
+        </li>
 
-Dashboard
+    </ul>
 
-</a>
-
-</li>
-
-<li>
-
-<a href="buku.html">
-
-<i class="fa-solid fa-book"></i>
-
-Buku
-
-</a>
-
-</li>
-
-<li>
-
-<a href="anggota.html">
-
-<i class="fa-solid fa-users"></i>
-
-Anggota
-
-</a>
-
-</li>
-
-<li>
-
-<a href="peminjaman.html">
-
-<i class="fa-solid fa-book-open-reader"></i>
-
-Peminjaman
-
-</a>
-
-</li>
-
-<li class="active">
-
-<a href="pengembalian.html">
-
-<i class="fa-solid fa-arrow-rotate-left"></i>
-
-Pengembalian
-
-</a>
-
-</li>
-
-<li>
-
-<a href="laporan.html">
-
-<i class="fa-solid fa-chart-column"></i>
-
-Laporan
-
-</a>
-
-</li>
-
-</ul>
-
-<div class="logout">
-
-<a href="login.html">
-
-<i class="fa-solid fa-right-from-bracket"></i>
-
-Logout
-
-</a>
-
-</div>
+    <div class="logout">
+        <a href="login.html">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+    </div>
 
 </aside>
 
@@ -128,439 +89,158 @@ Logout
 
 <header class="topbar">
 
-<div>
+    <div>
 
-<h1>Transaksi Pengembalian</h1>
+        <h1>Pengembalian Buku</h1>
 
-<p>Kelola proses pengembalian buku perpustakaan.</p>
+        <p>Kelola proses pengembalian buku perpustakaan.</p>
 
-</div>
+    </div>
 
-<div class="profile">
+    <div class="profile">
 
-<img src="images/admin.jpg" alt="Admin">
+        <img src="images/admin.jpg">
 
-<div>
+        <div>
 
-<h4>Administrator</h4>
+            <h4>Administrator</h4>
 
-<span>Admin Perpustakaan</span>
+            <span>Admin Perpustakaan</span>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </header>
 
-<!-- ================= IDENTITAS ================= -->
+<!-- ================= CARD ================= -->
+
+<section class="cards">
+
+    <div class="card">
+
+        <div>
+
+            <h2 id="borrowCount">0</h2>
+
+            <p>Sedang Dipinjam</p>
+
+        </div>
+
+        <i class="fa-solid fa-book-open-reader"></i>
+
+    </div>
+
+    <div class="card">
+
+        <div>
+
+            <h2 id="returnedCount">0</h2>
+
+            <p>Sudah Dikembalikan</p>
+
+        </div>
+
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+
+    </div>
+
+    <div class="card">
+
+        <div>
+
+            <h2 id="fineTotal">Rp 0</h2>
+
+            <p>Total Denda</p>
+
+        </div>
+
+        <i class="fa-solid fa-money-bill-wave"></i>
+
+    </div>
+
+</section>
+<!-- ================= SEARCH ================= -->
 
 <div class="table-card">
 
-<div class="table-header">
+    <div class="table-header">
 
-<h2>
+        <h2>
 
-<i class="fa-solid fa-user-check"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
 
-Data Anggota
+            Cari Data Peminjaman
 
-</h2>
+        </h2>
 
-</div>
+    </div>
 
-<div class="search-member">
+    <div class="search-area">
 
-<input
-type="text"
-placeholder="Masukkan ID Anggota atau Nama Anggota">
+        <input
+            type="text"
+            id="searchLoan"
+            placeholder="Cari Nama Anggota/Judul Buku...">
 
-<button class="btn-primary">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-Cari
-
-</button>
+    </div>
 
 </div>
-
-<div class="member-info">
-
-<div class="member-avatar">
-
-<i class="fa-solid fa-user"></i>
-
-</div>
-
-<div class="member-detail">
-
-<h3>Adi Suryadi</h3>
-
-<p>ID Anggota : AG001</p>
-
-<p>Program Studi : Teknik Informatika</p>
-
-<p>
-
-Status :
-
-<span class="badge success">
-
-Aktif
-
-</span>
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= LAYOUT ================= -->
-
-<div class="report-grid">
-
-<!-- ================= KIRI ================= -->
-
-<div class="report-card">
-
-<h3>
-
-<i class="fa-solid fa-book"></i>
-
-Daftar Buku yang Dipinjam
-
-</h3>
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>No</th>
-
-<th>Judul Buku</th>
-
-<th>Tanggal Pinjam</th>
-
-<th>Jatuh Tempo</th>
-
-<th>Status</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<td>1</td>
-
-<td>Java Programming</td>
-
-<td>25 Juni 2026</td>
-
-<td>02 Juli 2026</td>
-
-<td>
-
-<span class="badge success">
-
-Tepat Waktu
-
-</span>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>2</td>
-
-<td>Spring Boot</td>
-
-<td>20 Juni 2026</td>
-
-<td>27 Juni 2026</td>
-
-<td>
-
-<span id="statusBook" class="badge danger">
-
-Terlambat
-
-</span>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-<!-- ================= KANAN ================= -->
-
-<div class="report-card">
-
-<h3>
-
-<i class="fa-solid fa-receipt"></i>
-
-Ringkasan Pengembalian
-
-</h3>
-
-<div class="summary-box">
-
-<div class="summary-item">
-
-<label>Total Buku Dikembalikan</label>
-
-<h2 id="totalBook">2</h2>
-
-</div>
-
-<div class="summary-item">
-
-<label>Tanggal Pengembalian</label>
-
-<input
-type="date"
-value="2026-06-30">
-
-</div>
-
-<div class="summary-item">
-
-<label>Total Hari Terlambat</label>
-
-<h3 style="color:#dc2626;">3 Hari</h3>
-
-</div>
-
-<div class="summary-item">
-
-<label>Denda per Hari</label>
-
-<h3>Rp 2.000</h3>
-
-</div>
-
-<div class="summary-item">
-
-<label>Total Denda</label>
-
-<h2 id="totalDenda" style="color:#dc2626;">
-
-Rp 6.000
-
-</h2>
-
-</div>
-
-<div class="summary-item">
-
-<label>Metode Pembayaran</label>
-
-<select>
-
-<option>Tunai</option>
-
-<option>QRIS</option>
-
-<option>Transfer Bank</option>
-
-</select>
-
-</div>
-
-<div class="summary-item">
-
-<label>Catatan</label>
-
-<textarea
-rows="4"
-placeholder="Tambahkan catatan pengembalian..."></textarea>
-
-</div>
-
-<hr>
-
-<button id="returnBookBtn" class="btn-success btn-full">
-
-<i class="fa-solid fa-check"></i>
-
-Proses Pengembalian
-
-</button>
-
-<br><br>
-
-<button class="btn-danger btn-full">
-
-<i class="fa-solid fa-xmark"></i>
-
-Batalkan
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= PANDUAN ================= -->
-
-<div class="table-card">
-
-<div class="table-header">
-
-<h2>
-
-<i class="fa-solid fa-circle-info"></i>
-
-Panduan Pengembalian
-
-</h2>
-
-</div>
-
-<div class="guide-list">
-
-<div class="guide-item">
-
-<div class="guide-icon">
-
-1
-
-</div>
-
-<div>
-
-<h4>Periksa Kondisi Buku</h4>
-
-<p>
-
-Pastikan buku tidak rusak, sobek, ataupun hilang halaman.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="guide-item">
-
-<div class="guide-icon">
-
-2
-
-</div>
-
-<div>
-
-<h4>Cek Keterlambatan</h4>
-
-<p>
-
-Sistem akan menghitung otomatis jumlah hari keterlambatan.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="guide-item">
-
-<div class="guide-icon">
-
-3
-
-</div>
-
-<div>
-
-<h4>Pembayaran Denda</h4>
-
-<p>
-
-Apabila ada denda, lakukan pembayaran terlebih dahulu.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="guide-item">
-
-<div class="guide-icon">
-
-4
-
-</div>
-
-<div>
-
-<h4>Selesaikan Transaksi</h4>
-
-<p>
-
-Klik tombol <b>Proses Pengembalian</b> untuk menyimpan transaksi.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<!-- ================= MODAL KONFIRMASI ================= -->
-
-<div id="returnModal" class="modal">
-
-<div class="modal-content">
-
-<span class="closeReturn">&times;</span>
-
-<h2>Konfirmasi Pengembalian</h2>
-
-<p style="margin-top:20px">
-
-Apakah Anda yakin ingin memproses pengembalian buku ini?
-
-</p>
-
+<br>
 <br>
 
-<button id="confirmReturn" class="btn-success">
+<!-- ================= TABLE ================= -->
 
-Ya, Proses
+<div class="table-card">
 
-</button>
+    <div class="table-header">
 
-<button id="cancelReturn" class="btn-danger">
+        <h2>
+            Daftar Pengembalian
 
-Batal
+        </h2>
 
-</button>
+    </div>
+
+    <table>
+
+        <thead>
+
+        <tr>
+
+            <th>Anggota</th>
+
+            <th>Buku</th>
+
+            <th>Tanggal Pinjam</th>
+
+            <th>Jatuh Tempo</th>
+
+            <th>Status</th>
+
+            <th>Denda</th>
+
+            <th>Aksi</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody id="returnTableBody">
+
+        </tbody>
+
+    </table>
 
 </div>
 
+</main>
+
 </div>
 
+<script src="js/api.js"></script>
 <script src="js/app.js"></script>
-
+<script src="js/return.js"></script>
 </body>
+
 </html>

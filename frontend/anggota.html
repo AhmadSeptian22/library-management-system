@@ -157,63 +157,38 @@
 <section class="cards">
 
     <div class="card">
-
         <div>
-
-            <h2>5</h2>
-
+            <h2 id="totalMembers">0</h2>
             <p>Total Anggota</p>
-
         </div>
-
         <i class="fa-solid fa-users"></i>
-
     </div>
 
     <div class="card">
-
         <div>
-
-            <h2>5</h2>
-
+            <h2 id="activeMembers">0</h2>
             <p>Anggota Aktif</p>
-
         </div>
-
         <i class="fa-solid fa-user-check"></i>
-
     </div>
 
     <div class="card">
-
         <div>
-
-            <h2>3</h2>
-
+            <h2 id="newMembers">0</h2>
             <p>Anggota Baru</p>
-
         </div>
-
         <i class="fa-solid fa-user-plus"></i>
-
     </div>
 
     <div class="card">
-
         <div>
-
-            <h2>0</h2>
-
+            <h2 id="inactiveMembers">0</h2>
             <p>Non Aktif</p>
-
         </div>
-
         <i class="fa-solid fa-user-xmark"></i>
-
     </div>
 
 </section>
-
 <!-- ================= TABEL ================= -->
 
 <section class="table-card">
@@ -235,16 +210,15 @@ Tambah Anggota
 <div class="search-area">
 
 <input
+    id="searchMember"
+    onkeyup="searchMember()"
+    placeholder="Cari Nama / NIM / Email">
 
-type="text"
+<button
+    class="btn-primary"
+    onclick="searchMember()">
 
-placeholder="Cari Nama / NIM / Email">
-
-<button class="btn-primary">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-Cari
+    Cari
 
 </button>
 

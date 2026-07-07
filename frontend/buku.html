@@ -156,64 +156,39 @@ Logout
 
 <section class="cards">
 
-<div class="card">
+    <div class="card">
+        <div>
+            <h2 id="totalBooks">0</h2>
+            <p>Total Buku</p>
+        </div>
+        <i class="fa-solid fa-book"></i>
+    </div>
 
-<div>
+    <div class="card">
+        <div>
+            <h2 id="availableBooks">0</h2>
+            <p>Tersedia</p>
+        </div>
+        <i class="fa-solid fa-circle-check"></i>
+    </div>
 
-<h2>420</h2>
+    <div class="card">
+        <div>
+            <h2 id="borrowedBooks">0</h2>
+            <p>Dipinjam</p>
+        </div>
+        <i class="fa-solid fa-book-open-reader"></i>
+    </div>
 
-<p>Total Buku</p>
-
-</div>
-
-<i class="fa-solid fa-book"></i>
-
-</div>
-
-<div class="card">
-
-<div>
-
-<h2>280</h2>
-
-<p>Tersedia</p>
-
-</div>
-
-<i class="fa-solid fa-circle-check"></i>
-
-</div>
-
-<div class="card">
-
-<div>
-
-<h2>32</h2>
-
-<p>Dipinjam</p>
-
-</div>
-
-<i class="fa-solid fa-book-open-reader"></i>
-
-</div>
-
-<div class="card">
-
-<div>
-
-<h2>8</h2>
-
-<p>Rusak</p>
-
-</div>
-
-<i class="fa-solid fa-triangle-exclamation"></i>
-
-</div>
+    <div class="card">
+        <div>
+            <h2 id="emptyStockBooks">0</h2>
+            <p>Stok Habis</p>
+        </div>
+        <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
 
 </section>
-
 <section class="table-card">
 
 <div class="table-header">
@@ -228,12 +203,15 @@ Logout
 <div class="search-area">
 
 <input
-type="text"
+id="searchBook"
+onkeyup="searchBook()"
 placeholder="Cari Judul Buku...">
 
-<button class="btn-primary">
+<button
+    class="btn-primary"
+    onclick="searchBook()">
 
-Cari
+    Cari
 
 </button>
 
