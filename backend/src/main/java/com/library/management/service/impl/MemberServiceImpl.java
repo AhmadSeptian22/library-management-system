@@ -28,6 +28,8 @@ public class MemberServiceImpl implements MemberService {
         return new MemberResponse(
                 member.getId(),
                 member.getFullName(),
+                member.getNim(),
+                member.getStudyProgram(),
                 member.getEmail(),
                 member.getPhone(),
                 member.getAddress(),
@@ -40,12 +42,14 @@ public class MemberServiceImpl implements MemberService {
     // ====================================
     // GET ALL
     // ====================================
-    @Override
-    public Page<MemberResponse> getAllMembers(Pageable pageable) {
+@Override
+public Page<MemberResponse> getAllMembers(Pageable pageable) {
 
-        return memberRepository.findAll(pageable)
-                .map(this::mapToResponse);
-    }
+    System.out.println("TOTAL MEMBER = " + memberRepository.count());
+
+    return memberRepository.findAll(pageable)
+            .map(this::mapToResponse);
+}
 
     // ====================================
     // GET BY ID
@@ -77,6 +81,8 @@ public class MemberServiceImpl implements MemberService {
         Member member = new Member();
 
         member.setFullName(request.getFullName());
+        member.setNim(request.getNim());
+        member.setStudyProgram(request.getStudyProgram());
         member.setEmail(request.getEmail());
         member.setPhone(request.getPhone());
         member.setAddress(request.getAddress());
@@ -108,6 +114,8 @@ public class MemberServiceImpl implements MemberService {
         }
 
         member.setFullName(request.getFullName());
+        member.setNim(request.getNim());
+        member.setStudyProgram(request.getStudyProgram());
         member.setEmail(request.getEmail());
         member.setPhone(request.getPhone());
         member.setAddress(request.getAddress());
@@ -142,4 +150,5 @@ public class MemberServiceImpl implements MemberService {
                 .map(this::mapToResponse);
     }
 
+    
 }

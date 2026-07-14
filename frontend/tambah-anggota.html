@@ -144,7 +144,7 @@ Logout
 
 <h4>Administrator</h4>
 
-<span>Admin Perpustakaan</span>
+<span>Perpustakaan</span>
 
 </div>
 
@@ -156,7 +156,7 @@ Logout
 
 <h2>Form Tambah Anggota</h2>
 
-<form>
+<form id="memberForm">
 
 <div class="form-group">
 
@@ -164,17 +164,21 @@ Logout
 
 <input
 type="text"
-placeholder="Masukkan Nama Lengkap">
+id="fullName"
+placeholder="Masukkan Nama Lengkap"
+required>
 
 </div>
 
 <div class="form-group">
 
-<label>NIM / NIS</label>
+<label>NIM</label>
 
 <input
 type="text"
-placeholder="Masukkan NIM">
+id="nim"
+placeholder="Masukkan NIM"
+required>
 
 </div>
 
@@ -182,21 +186,11 @@ placeholder="Masukkan NIM">
 
 <label>Program Studi</label>
 
-<select>
-
-<option>-- Pilih Program Studi --</option>
-
-<option>Teknik Informatika</option>
-
-<option>Sistem Informasi</option>
-
-<option>Manajemen</option>
-
-<option>Akuntansi</option>
-
-<option>Hukum</option>
-
-</select>
+<input
+type="text"
+id="studyProgram"
+placeholder="Masukkan Program Studi"
+required>
 
 </div>
 
@@ -206,7 +200,9 @@ placeholder="Masukkan NIM">
 
 <input
 type="email"
-placeholder="contoh@email.com">
+id="email"
+placeholder="contoh@email.com"
+required>
 
 </div>
 
@@ -216,7 +212,9 @@ placeholder="contoh@email.com">
 
 <input
 type="text"
-placeholder="08xxxxxxxxxx">
+id="phone"
+placeholder="08xxxxxxxxxx"
+required>
 
 </div>
 
@@ -225,37 +223,49 @@ placeholder="08xxxxxxxxxx">
 <label>Alamat</label>
 
 <textarea
+id="address"
 rows="4"
-placeholder="Masukkan Alamat"></textarea>
+placeholder="Masukkan Alamat"
+required></textarea>
 
 </div>
 
 <div class="form-group">
 
-<label>Status</label>
+    <label>Status</label>
 
-<select>
+    <div class="status-option">
 
-<option>Aktif</option>
+        <label class="status-card">
 
-<option>Non Aktif</option>
+            <input
+                type="radio"
+                name="active"
+                value="true"
+                checked>
 
-</select>
+            <span>Aktif</span>
 
-</div>
+        </label>
 
-<div class="form-group">
+        <label class="status-card">
 
-<label>Foto Anggota</label>
+            <input
+                type="radio"
+                name="active"
+                value="false">
 
-<input
-type="file">
+            <span>Non Aktif</span>
 
-</div>
+        </label>
+
+    </div>
 
 <div class="button-group">
 
-<button class="btn-primary">
+<button
+type="submit"
+class="btn-primary">
 
 <i class="fa-solid fa-floppy-disk"></i>
 
@@ -372,7 +382,8 @@ Batal
 
 </div>
 
-<script src="js/app.js"></script>
+<script src="js/api.js"></script>
+<script src="js/add-member.js"></script>
 
 </body>
 

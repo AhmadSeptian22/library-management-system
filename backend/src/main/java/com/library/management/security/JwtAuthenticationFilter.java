@@ -36,6 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
+        System.out.println("Authorization = " + authHeader);
 
         // Kalau tidak ada token
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -45,9 +46,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // Ambil token setelah "Bearer "
         String token = authHeader.substring(7);
-
+        System.out.println("Token = " + token);
         // Ambil username dari token
         String username = jwtService.extractUsername(token);
+        System.out.println("Username = " + username);
 
         // Jika username valid dan belum login
         if (username != null &&
@@ -64,6 +66,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                 null,
                                 Collections.emptyList()
                         );
+        System.out.println("User ditemukan = " + user.getUsername());
+        System.out.println("Token Valid = " + jwtService.isTokenValid(token, user.getUsername()));
 
                 authentication.setDetails(
                         new WebAuthenticationDetailsSource()
@@ -72,6 +76,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext()
                         .setAuthentication(authentication);
+                        System.out.println("Authentication berhasil diset.");
             }
         }
 

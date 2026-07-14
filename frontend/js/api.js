@@ -11,12 +11,21 @@ const BASE_URL = "http://localhost:8080/api";
 
 async function request(url, method = "GET", data = null) {
 
+    const token = localStorage.getItem("token");
+
     const options = {
+
         method: method,
+
         headers: {
             "Content-Type": "application/json"
         }
+
     };
+
+    if (token) {
+        options.headers["Authorization"] = "Bearer " + token;
+    }
 
     if (data !== null) {
         options.body = JSON.stringify(data);
@@ -26,11 +35,18 @@ async function request(url, method = "GET", data = null) {
 
         const response = await fetch(BASE_URL + url, options);
 
+        const result = await response.json();
+
         if (!response.ok) {
-            throw new Error("HTTP Error : " + response.status);
+
+            return {
+                success: false,
+                message: result.message || ("HTTP Error : " + response.status)
+            };
+
         }
 
-        return await response.json();
+        return result;
 
     } catch (error) {
 
@@ -70,16 +86,16 @@ async function getDashboardMembers() {
 // Total Peminjaman
 async function getDashboardBorrowings() {
 
-    const result = await request("/borrowings");
+    const result = await request("/loans");
 
     return result.data;
 
 }
 
 // Total Pengembalian
-async function getDashboardReturns() {
+async function getDashboardReturns(){
 
-    const result = await request("/returns");
+    const result = await request("/loans/late");
 
     return result.data;
 
@@ -307,37 +323,46 @@ async function removeBook(id) {
 ====================================================*/
 
 // Ambil semua anggota
-async function getMembers(page = 0, size = 20) {
+async function getMembers(page = 0, size = 100) {
 
     return await request(`/members?page=${page}&size=${size}`);
 
 }
-
 // Ambil satu anggota
-async function getMember(id) {
+async function getMemberById(id){
 
-    return await request("/members/" + id);
-
-}
-
-// Tambah anggota
-async function addMember(member) {
-
-    return await request("/members", "POST", member);
+    return await request(
+        "/members/" + id
+    );
 
 }
+// tambah anggota
+async function createMember(member){
 
-// Update anggota
-async function updateMember(id, member) {
-
-    return await request("/members/" + id, "PUT", member);
+    return await request(
+        "/members",
+        "POST",
+        member
+    );
 
 }
+//update anggota
+async function updateMember(id, member){
 
-// Hapus anggota
-async function deleteMember(id) {
+    return await request(
+        "/members/" + id,
+        "PUT",
+        member
+    );
 
-    return await request("/members/" + id, "DELETE");
+}
+//haspus anggota
+async function deleteMember(id){
+
+    return await request(
+        "/members/" + id,
+        "DELETE"
+    );
 
 }
 
@@ -393,35 +418,6 @@ function validateMember(member) {
     return true;
 
 }
-
-/*====================================================
-    SIMPAN ANGGOTA
-====================================================*/
-
-async function saveMember(member) {
-
-    if (!validateMember(member)) {
-
-        return;
-
-    }
-
-    const result = await addMember(member);
-
-    if (result.success) {
-
-        alert("Anggota berhasil ditambahkan");
-
-        location.href = "anggota.html";
-
-    } else {
-
-        alert(result.message);
-
-    }
-
-}
-
 /*====================================================
     UPDATE ANGGOTA
 ====================================================*/
@@ -486,35 +482,35 @@ async function removeMember(id) {
 // Ambil semua data peminjaman
 async function getBorrowings(page = 0, size = 20) {
 
-    return await request(`/borrowings?page=${page}&size=${size}`);
+    return await request(`/loans?page=${page}&size=${size}`);
 
 }
 
 // Ambil satu data peminjaman
 async function getBorrowing(id) {
 
-    return await request("/borrowings/" + id);
+    return await request("/loans/" + id);
 
 }
 
 // Tambah peminjaman
 async function addBorrowing(borrowing) {
 
-    return await request("/borrowings", "POST", borrowing);
+    return await request("/loans", "POST", borrowing);
 
 }
 
 // Update peminjaman
 async function updateBorrowing(id, borrowing) {
 
-    return await request("/borrowings/" + id, "PUT", borrowing);
+    return await request("/loans/" + id, "PUT", borrowing);
 
 }
 
 // Hapus peminjaman
 async function deleteBorrowing(id) {
 
-    return await request("/borrowings/" + id, "DELETE");
+    return await request("/loans/" + id, "DELETE");
 
 }
 
@@ -705,7 +701,7 @@ async function extendBorrowing(id, newReturnDate) {
 async function returnBorrowing(id) {
 
     return await request(
-        "/borrowings/" + id + "/return",
+        "/loans/" + id + "/return",
         "PUT"
     );
 
@@ -717,7 +713,7 @@ async function returnBorrowing(id) {
 // Ambil semua data pengembalian
 async function getReturns(page = 0, size = 20) {
 
-    return await request(`/returns?page=${page}&size=${size}`);
+    return await request(`/loans?page=${page}&size=${size}`);
 
 }
 
@@ -972,5 +968,59 @@ function formatCurrency(value){
     }).format(value);
 
 }
+async function getCategories(){
+
+    return await request("/categories");
+
+}
+async function getBookById(id){
+
+    return await request(`/books/${id}`);
+
+}
+async function updateBook(id, book){
+
+    return await request(
+        `/books/${id}`,
+        "PUT",
+        book
+    );
+
+}
+// ===============================
+// LOAN
+// ===============================
+
+async function createLoan(data) {
+
+    return await request("/loans", "POST", data);
+
+}
+
+async function getLoans() {
+
+    return await request("/loans");
+
+}
+async function getLoanById(id){
+
+    return await request(`/loans/${id}`);
+
+}
+
+async function returnLoan(id) {
+
+    return await request(`/loans/${id}/return`, "PUT");
+
+}
 
 console.log("LIBMAN API Loaded Successfully");
+// ======================================
+// LATE LOAN
+// ======================================
+
+async function getLateLoans(){
+
+    return await request("/loans/late");
+
+}

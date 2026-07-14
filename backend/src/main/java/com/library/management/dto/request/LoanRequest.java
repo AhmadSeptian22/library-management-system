@@ -1,15 +1,18 @@
 package com.library.management.dto.request;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class LoanRequest {
 
     @NotNull(message = "Member wajib dipilih")
     private Long memberId;
 
-    @NotNull(message = "Buku wajib dipilih")
-    private Long bookId;
+    @NotEmpty(message = "Minimal pilih satu buku")
+    private List<Long> bookIds;
 
     @NotNull(message = "Tanggal pinjam wajib diisi")
     private LocalDate loanDate;
@@ -28,12 +31,12 @@ public class LoanRequest {
         this.memberId = memberId;
     }
 
-    public Long getBookId() {
-        return bookId;
+    public List<Long> getBookIds() {
+        return bookIds;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setBookIds(List<Long> bookIds) {
+        this.bookIds = bookIds;
     }
 
     public LocalDate getLoanDate() {

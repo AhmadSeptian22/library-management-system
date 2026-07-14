@@ -144,7 +144,7 @@
 
             <h4>Administrator</h4>
 
-            <span>Admin Perpustakaan</span>
+            <span>Perpustakaan</span>
 
         </div>
 
@@ -157,63 +157,38 @@
 <section class="cards">
 
     <div class="card">
-
         <div>
-
-            <h2>5</h2>
-
+            <h2 id="totalMembers">0</h2>
             <p>Total Anggota</p>
-
         </div>
-
         <i class="fa-solid fa-users"></i>
-
     </div>
 
     <div class="card">
-
         <div>
-
-            <h2>5</h2>
-
+            <h2 id="activeMembers">0</h2>
             <p>Anggota Aktif</p>
-
         </div>
-
         <i class="fa-solid fa-user-check"></i>
-
     </div>
 
     <div class="card">
-
         <div>
-
-            <h2>3</h2>
-
+            <h2 id="newMembers">0</h2>
             <p>Anggota Baru</p>
-
         </div>
-
         <i class="fa-solid fa-user-plus"></i>
-
     </div>
 
     <div class="card">
-
         <div>
-
-            <h2>0</h2>
-
+            <h2 id="inactiveMembers">0</h2>
             <p>Non Aktif</p>
-
         </div>
-
         <i class="fa-solid fa-user-xmark"></i>
-
     </div>
 
 </section>
-
 <!-- ================= TABEL ================= -->
 
 <section class="table-card">
@@ -235,16 +210,15 @@ Tambah Anggota
 <div class="search-area">
 
 <input
+    id="searchMember"
+    onkeyup="searchMember()"
+    placeholder="Cari Nama / NIM / Email">
 
-type="text"
+<button
+    class="btn-primary"
+    onclick="searchMember()">
 
-placeholder="Cari Nama / NIM / Email">
-
-<button class="btn-primary">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-Cari
+    Cari
 
 </button>
 
@@ -253,223 +227,20 @@ Cari
 <table>
 
 <thead>
-
 <tr>
-
-<th>ID</th>
-
-<th>Nama</th>
-
-<th>NIM</th>
-
-<th>Program Studi</th>
-
-<th>No HP</th>
-
-<th>Status</th>
-
-<th>Aksi</th>
-
+    <th>Nama</th>
+    <th>NIM</th>
+    <th>Program Studi</th>
+    <th>Email</th>
+    <th>No. HP</th>
+    <th>Alamat</th>
+    <th>Status</th>
+    <th>Aksi</th>
 </tr>
-
 </thead>
 
-<tbody>
-<tr>
-
-<td>AG001</td>
-
-<td>Adi</td>
-
-<td>23110088</td>
-
-<td>Teknik Informatika</td>
-
-<td>089666389529</td>
-
-<td>
-
-<span class="badge success">
-
-Aktif
-
-</span>
-
-</td>
-
-<td>
-
-<a href="edit-anggota.html" class="btn-edit">
-
-<i class="fa-solid fa-pen"></i>
-
-</a>
-
-<button class="btn-delete">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>AG002</td>
-
-<td>Septian</td>
-
-<td>22</td>
-
-<td>Sistem Informasi</td>
-
-<td>087733887692</td>
-
-<td>
-
-<span class="badge success">
-
-Aktif
-
-</span>
-
-</td>
-
-<td>
-
-<a href="edit-anggota.html" class="btn-edit">
-
-<i class="fa-solid fa-pen"></i>
-
-</a>
-
-<button class="btn-delete">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>AG004</td>
-
-<td>Hakam</td>
-
-<td>23</td>
-
-<td>Management</td>
-
-<td>083823928039</td>
-
-<td>
-
-<span class="badge success">
-
-Aktif
-
-</span>
-
-</td>
-
-<td>
-
-<a href="edit-anggota.html" class="btn-edit">
-
-<i class="fa-solid fa-pen"></i>
-
-</a>
-
-<button class="btn-delete">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>AG005</td>
-
-<td>Reinna</td>
-
-<td>23110086</td>
-
-<td>Akuntansi</td>
-
-<td>08872922420</td>
-
-<td>
-
-<span class="badge success">
-
-Aktif
-
-</span>
-
-</td>
-
-<td>
-
-<a href="edit-anggota.html" class="btn-edit">
-
-<i class="fa-solid fa-pen"></i>
-
-</a>
-
-<button class="btn-delete">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>AG006</td>
-
-<td>Ikhsan</td>
-
-<td>23110097</td>
-
-<td>Hukum</td>
-
-<td>085846134705</td>
-
-<td>
-
-<span class="badge success">
-
-Aktif
-
-</span>
-
-</td>
-
-<td>
-
-<a href="edit-anggota.html" class="btn-edit">
-
-<i class="fa-solid fa-pen"></i>
-
-</a>
-
-<button class="btn-delete">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
+<tbody id="memberTableBody">
+</tbody>
 
 </td>
 
@@ -495,7 +266,8 @@ Aktif
 
 </div>
 
-<script src="js/app.js"></script>
+<script src="js/api.js"></script>
+<script src="js/member.js"></script>
 
 </body>
 

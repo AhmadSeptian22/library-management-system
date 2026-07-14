@@ -32,9 +32,12 @@ function detectCurrentPage() {
 
     switch (page) {
 
-        case "dashboard.html":
+    case "dashboard.html":
 
-            loadDashboard();
+    loadDashboard();
+    loadLateNotification();
+
+    break;
 
             break;
 
@@ -189,4 +192,57 @@ function hideLoading() {
     console.log("Finished");
 
 }
-    
+async function loadLateNotification(){
+
+    const result = await getLateLoans();
+
+    if(!result.success){
+        return;
+    }
+
+    const list = document.getElementById("lateLoanList");
+
+    const total = document.getElementById("lateLoanCount");
+
+    if(!list || !total){
+        return;
+    }
+
+    total.innerHTML = result.data.length;
+
+    if(result.data.length === 0){
+
+        list.innerHTML = `
+            <p class="no-late">
+                Tidak ada anggota yang terlambat.
+            </p>
+        `;
+
+        return;
+    }
+
+    list.innerHTML = "";
+
+    result.data.forEach(loan=>{
+
+        list.innerHTML += `
+
+            <div class="late-item">
+
+                <strong>${loan.memberName}</strong><br>
+
+                📚 ${loan.bookTitle}<br>
+
+                📅 Jatuh Tempo :
+                ${formatDate(loan.dueDate)}<br>
+
+                💰 Denda :
+                ${formatCurrency(loan.fine)}
+
+            </div>
+
+        `;
+
+    });
+
+}

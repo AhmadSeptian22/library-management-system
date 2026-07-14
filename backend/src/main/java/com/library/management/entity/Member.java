@@ -11,46 +11,57 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false,length = 100)
+    @Column(nullable = false, length = 100)
     private String fullName;
 
-    @Column(nullable = false,unique = true,length = 100)
+    @Column(nullable = false, unique = true, length = 20)
+    private String nim;
+
+    @Column(nullable = false, length = 100)
+    private String studyProgram;
+
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(nullable = false,unique = true,length = 20)
+    @Column(nullable = false, unique = true, length = 20)
     private String phone;
 
-    @Column(nullable = false,length = 255)
+    @Column(nullable = false, length = 255)
     private String address;
 
     @Column(nullable = false)
     private Boolean active = true;
 
-    @Column(name="created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name="updated_at")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
-    public void preUpdate(){
+    public void preUpdate() {
         updatedAt = LocalDateTime.now();
     }
 
-    public Member(){}
+    public Member() {
+    }
+
+    // =========================
+    // Getter & Setter
+    // =========================
 
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
-        this.id=id;
+        this.id = id;
     }
 
     public String getFullName() {
@@ -58,7 +69,23 @@ public class Member {
     }
 
     public void setFullName(String fullName) {
-        this.fullName=fullName;
+        this.fullName = fullName;
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+
+    public String getStudyProgram() {
+        return studyProgram;
+    }
+
+    public void setStudyProgram(String studyProgram) {
+        this.studyProgram = studyProgram;
     }
 
     public String getEmail() {
@@ -66,7 +93,7 @@ public class Member {
     }
 
     public void setEmail(String email) {
-        this.email=email;
+        this.email = email;
     }
 
     public String getPhone() {
@@ -74,7 +101,7 @@ public class Member {
     }
 
     public void setPhone(String phone) {
-        this.phone=phone;
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -82,7 +109,7 @@ public class Member {
     }
 
     public void setAddress(String address) {
-        this.address=address;
+        this.address = address;
     }
 
     public Boolean getActive() {
@@ -90,7 +117,7 @@ public class Member {
     }
 
     public void setActive(Boolean active) {
-        this.active=active;
+        this.active = active;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -100,5 +127,4 @@ public class Member {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-
 }
