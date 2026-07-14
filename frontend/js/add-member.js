@@ -60,18 +60,19 @@ async function saveMember(e) {
 
     }
 
-    const result = await createMember(member);
+const result = await createMember(member);
 
-    if (result.success) {
+console.log("Response Create Member :", result);
 
-        alert("Anggota berhasil ditambahkan.");
+if(result.success){
 
-        window.location.href = "anggota.html";
+    alert("Anggota berhasil ditambahkan");
 
-    } else {
+    window.location.href = "anggota.html";
 
-        alert(result.message);
+}else{
 
-    }
+    alert(result.message);
 
+}
 }

@@ -42,12 +42,14 @@ public class MemberServiceImpl implements MemberService {
     // ====================================
     // GET ALL
     // ====================================
-    @Override
-    public Page<MemberResponse> getAllMembers(Pageable pageable) {
+@Override
+public Page<MemberResponse> getAllMembers(Pageable pageable) {
 
-        return memberRepository.findAll(pageable)
-                .map(this::mapToResponse);
-    }
+    System.out.println("TOTAL MEMBER = " + memberRepository.count());
+
+    return memberRepository.findAll(pageable)
+            .map(this::mapToResponse);
+}
 
     // ====================================
     // GET BY ID
@@ -148,4 +150,5 @@ public class MemberServiceImpl implements MemberService {
                 .map(this::mapToResponse);
     }
 
+    
 }

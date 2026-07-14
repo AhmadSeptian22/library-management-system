@@ -36,6 +36,7 @@ async function loadReturns() {
     loans = result.data.content;
     console.log(loans);
     renderTable(loans);
+    renderHistory(loans);
     updateSummary();
 
 }
@@ -80,7 +81,7 @@ function renderTable(data) {
 
                 <td>
 
-                    Rp ${loan.fine}
+                    ${formatCurrency(loan.fine)}
 
                 </td>
 
@@ -103,8 +104,54 @@ function renderTable(data) {
         });
 
 }
+// ======================================
+// HISTORY TABLE
+// ======================================
 
+// ======================================
+// RIWAYAT PENGEMBALIAN
+// ======================================
 
+function renderHistory(data){
+
+    const tbody =
+        document.getElementById("historyTableBody");
+
+    tbody.innerHTML = "";
+
+    data
+        .filter(loan => loan.status === "RETURNED")
+        .forEach(loan => {
+
+            tbody.innerHTML += `
+
+            <tr>
+
+                <td>${loan.memberName}</td>
+
+                <td>${loan.bookTitle}</td>
+
+                <td>${formatDate(loan.loanDate)}</td>
+
+                <td>${formatDate(loan.dueDate)}</td>
+
+                <td>${formatDate(loan.returnDate)}</td>
+
+                <td>${formatCurrency(loan.fine)}</td>
+
+                <td>
+                    <span class="status returned">
+                        Sudah Kembali
+                    </span>
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+}
 
 // ======================================
 // SUMMARY

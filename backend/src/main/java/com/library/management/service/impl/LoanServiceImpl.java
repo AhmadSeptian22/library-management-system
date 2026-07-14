@@ -12,9 +12,12 @@ import com.library.management.repository.BookRepository;
 import com.library.management.repository.LoanRepository;
 import com.library.management.repository.MemberRepository;
 import com.library.management.service.LoanService;
+import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class LoanServiceImpl implements LoanService {
@@ -36,23 +39,42 @@ public class LoanServiceImpl implements LoanService {
     // ==========================
     // MAPPING
     // ==========================
-    private LoanResponse mapToResponse(Loan loan) {
+private LoanResponse mapToResponse(Loan loan) {
 
-        return new LoanResponse(
-                loan.getId(),
-                loan.getMember().getId(),
-                loan.getMember().getFullName(),
-                loan.getBook().getId(),
-                loan.getBook().getTitle(),
-                loan.getLoanDate(),
-                loan.getDueDate(),
-                loan.getReturnDate(),
-                loan.getStatus(),
-                loan.getFine(),
-                loan.getCreatedAt(),
-                loan.getUpdatedAt()
-        );
+    double fine = loan.getFine();
+
+    if (loan.getStatus() == LoanStatus.BORROWED) {
+
+        LocalDate today = LocalDate.now();
+
+        if (today.isAfter(loan.getDueDate())) {
+
+            long lateDays =
+                    ChronoUnit.DAYS.between(
+                            loan.getDueDate(),
+                            today);
+
+            fine = lateDays * 2000;
+
+        }
+
     }
+
+    return new LoanResponse(
+            loan.getId(),
+            loan.getMember().getId(),
+            loan.getMember().getFullName(),
+            loan.getBook().getId(),
+            loan.getBook().getTitle(),
+            loan.getLoanDate(),
+            loan.getDueDate(),
+            loan.getReturnDate(),
+            loan.getStatus(),
+            fine,
+            loan.getCreatedAt(),
+            loan.getUpdatedAt()
+    );
+}
 
     // ==========================
     // GET ALL
@@ -81,21 +103,56 @@ public class LoanServiceImpl implements LoanService {
     // CREATE LOAN
     // ==========================
     @Override
-    public LoanResponse createLoan(LoanRequest request) {
+public List<LoanResponse> createLoan(LoanRequest request) {
 
-        Member member = memberRepository.findById(request.getMemberId())
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Member tidak ditemukan"));
+    Member member = memberRepository.findById(request.getMemberId())
+            .orElseThrow(() ->
+                    new ResourceNotFoundException("Member tidak ditemukan"));
 
-        Book book = bookRepository.findById(request.getBookId())
+    if (!Boolean.TRUE.equals(member.getActive())) {
+            throw new BadRequestException(
+            "Member tidak aktif, tidak dapat melakukan peminjaman."
+        );
+    }
+
+    long totalBorrowed =
+            loanRepository.countByMember_IdAndStatus(
+                    member.getId(),
+                    LoanStatus.BORROWED
+        );
+
+if (totalBorrowed + request.getBookIds().size() > 3) {
+
+    throw new BadRequestException(
+            "Member hanya boleh meminjam maksimal 3 buku."
+    );
+
+}
+
+    List<LoanResponse> responses = new java.util.ArrayList<>();
+
+    for (Long bookId : request.getBookIds()) {
+
+        Book book = bookRepository.findById(bookId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Buku tidak ditemukan"));
 
+    if (loanRepository.existsByMemberIdAndBookIdAndStatus(
+        member.getId(),
+        book.getId(),
+        LoanStatus.BORROWED)) {
+
+    throw new BadRequestException(
+            "Member masih meminjam buku \"" + book.getTitle() + "\""
+    );
+}
+
         if (book.getStock() <= 0) {
-            throw new BadRequestException("Stok buku habis");
+            throw new BadRequestException(
+                    "Stok buku \"" + book.getTitle() + "\" habis");
         }
 
-        // Kurangi stok buku
+        // kurangi stok
         book.setStock(book.getStock() - 1);
         bookRepository.save(book);
 
@@ -108,40 +165,70 @@ public class LoanServiceImpl implements LoanService {
         loan.setStatus(LoanStatus.BORROWED);
         loan.setFine(0.0);
 
-        return mapToResponse(loanRepository.save(loan));
+        Loan savedLoan = loanRepository.save(loan);
+
+        responses.add(mapToResponse(savedLoan));
     }
+
+    return responses;
+}
 
 
         // ==========================
         // RETURN BOOK
         // ==========================
-        @Override
-        public LoanResponse returnBook(Long id) {
+    @Override
+    public LoanResponse returnBook(Long id) {
 
-            Loan loan = loanRepository.findById(id)
-                    .orElseThrow(() ->
-                            new ResourceNotFoundException("Data peminjaman tidak ditemukan"));
+    Loan loan = loanRepository.findById(id)
+            .orElseThrow(() ->
+                    new ResourceNotFoundException("Data peminjaman tidak ditemukan"));
 
-            // Cek apakah buku sudah dikembalikan
-            if (loan.getStatus() == LoanStatus.RETURNED) {
-                throw new BadRequestException("Buku sudah dikembalikan");
-            }
+    // Buku sudah dikembalikan
+    if (loan.getStatus() == LoanStatus.RETURNED) {
+        throw new BadRequestException("Buku sudah dikembalikan");
+    }
+    
+        // ==========================
+        // HITUNG DENDA
+        // ==========================
 
-            // Update status
-            loan.setStatus(LoanStatus.RETURNED);
-            loan.setReturnDate(java.time.LocalDate.now());
+    LocalDate today = java.time.LocalDate.now();
 
-            // Tambah stok buku
-            Book book = loan.getBook();
-            book.setStock(book.getStock() + 1);
-            bookRepository.save(book);
+    long lateDays = ChronoUnit.DAYS.between(
+            loan.getDueDate(),
+            today
+    );
 
-            // Simpan loan
-            loanRepository.save(loan);
+    double fine = 0;
 
-            return mapToResponse(loan);
-        }
+    if (lateDays > 0) {
+        fine = lateDays * 2000; // Rp2.000 per hari
+    }
 
+    loan.setFine(fine);
+
+    // ==========================
+    // UPDATE STATUS
+    // ==========================
+
+    loan.setStatus(LoanStatus.RETURNED);
+    loan.setReturnDate(today);
+
+    // ==========================
+    // TAMBAH STOK BUKU
+    // ==========================
+
+    Book book = loan.getBook();
+
+    book.setStock(book.getStock() + 1);
+
+    bookRepository.save(book);
+
+    loanRepository.save(loan);
+
+    return mapToResponse(loan);
+}
     // ==========================
     // DELETE
     // ==========================
@@ -166,4 +253,17 @@ public class LoanServiceImpl implements LoanService {
                 .map(this::mapToResponse);
     }
 
+@Override
+public List<LoanResponse> getLateLoans(){
+
+    return loanRepository
+            .findByStatusAndDueDateBefore(
+                    LoanStatus.BORROWED,
+                    LocalDate.now()
+            )
+            .stream()
+            .map(this::mapToResponse)
+            .toList();
+
+}
 }

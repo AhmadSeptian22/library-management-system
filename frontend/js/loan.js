@@ -5,11 +5,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    await loadMembers();
-    await loadBooks();
-    document
-    .getElementById("memberSelect")
-    .addEventListener("change", showMemberInfo);
+await loadMembers();
+await loadBooks();
+
+document
+.getElementById("bookSearch")
+.addEventListener("keyup", searchBook);
+
+document
+.getElementById("memberSearch")
+.addEventListener("keyup", searchMember);
 
 });
 
@@ -18,19 +23,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Data sementara
 // ===================================
 let members = [];
-let selectedBooks = [];
+let books = [];
+let selectedBooks = [];/////////// ini di edit 
+let selectedBook = null;    
+let selectedMember = null;
+
 
 
 // ===================================
 // Load Member
 // ===================================
 
-async function loadMembers() {
+async function loadMembers(){
 
     const result = await getMembers();
-    console.log(result);
 
-    if (!result.success) {
+    if(!result.success){
 
         alert(result.message);
 
@@ -39,23 +47,127 @@ async function loadMembers() {
     }
 
     members = result.data.content;
-    console.log(members);
 
-    const select = document.getElementById("memberSelect");
+}
 
-    select.innerHTML = `
-        <option value="">-- Pilih Anggota --</option>
-    `;
+function searchMember(){
 
-    members.forEach(member => {
+    const keyword =
+        document
+        .getElementById("memberSearch")
+        .value
+        .toLowerCase();
 
-        select.innerHTML += `
-            <option value="${member.id}">
-                ${member.fullName}
-            </option>
+    const box =
+        document.getElementById("memberResult");
+
+    if(keyword==""){
+
+        box.style.display="none";
+
+        return;
+
+    }
+
+    const data =
+        members.filter(member=>
+
+            member.fullName
+            .toLowerCase()
+            .includes(keyword)
+
+            ||
+
+            member.nim
+            .toLowerCase()
+            .includes(keyword)
+
+        );
+
+    renderMemberResult(data);
+
+}
+
+function renderMemberResult(data){
+
+    const box =
+        document.getElementById("memberResult");
+
+    box.innerHTML="";
+
+    if(data.length===0){
+
+        box.style.display="none";
+
+        return;
+
+    }
+
+    box.style.display="block";
+
+    data.forEach(member=>{
+
+        box.innerHTML+=`
+
+        <div class="autocomplete-item"
+
+            onclick="chooseMember(${member.id})">
+
+            <strong>${member.fullName}</strong>
+
+            <small>
+
+                ${member.nim}
+
+                • ${member.studyProgram}
+
+            </small>
+
+        </div>
+
         `;
 
     });
+
+}
+function chooseMember(id){
+
+    selectedMember =
+        members.find(member => member.id === id);
+
+    if(!selectedMember){
+        return;
+    }
+
+    document.getElementById("memberSearch").value =
+        selectedMember.fullName;
+
+    document.getElementById("memberResult").style.display =
+        "none";
+
+    document.getElementById("memberName").textContent =
+        selectedMember.fullName;
+
+    document.getElementById("memberNim").textContent =
+        selectedMember.nim;
+
+    document.getElementById("memberStudy").textContent =
+        selectedMember.studyProgram;
+
+    const status =
+        document.getElementById("memberStatus");
+
+    if(selectedMember.active){
+
+        status.textContent = "Aktif";
+        status.className = "badge success";
+
+    }else{
+
+        status.textContent = "Non Aktif";
+        status.className = "badge danger";
+
+    }
 
 }
 
@@ -64,28 +176,156 @@ async function loadMembers() {
 // Load Buku
 // ===================================
 
-async function loadBooks() {
+async function loadBooks(){
 
     const result = await getBooks();
 
-    if (!result.success) {
+    if(!result.success){
+
         alert(result.message);
+
         return;
+
     }
 
-    const select = document.getElementById("bookSelect");
+    books = result.data.content;
 
-    select.innerHTML = `<option value="">Pilih Buku</option>`;
+}
 
-    result.data.content.forEach(book => {
+// ===================================
+// Search Buku
+// ===================================
+function searchBook(){
 
-        select.innerHTML += `
-            <option value="${book.id}">
+    const keyword =
+        document
+        .getElementById("bookSearch")
+        .value
+        .toLowerCase();
+
+    const box =
+        document.getElementById("bookResult");
+
+    if(keyword==""){
+
+        box.style.display="none";
+
+        return;
+
+    }
+
+    const data =
+        books.filter(book=>
+
+            book.title
+            .toLowerCase()
+            .includes(keyword)
+
+            ||
+
+            book.author
+            .toLowerCase()
+            .includes(keyword)
+
+        );
+
+    renderBookResult(data);
+
+}
+
+function renderBookResult(data){
+
+    const box = document.getElementById("bookResult");
+
+    box.innerHTML = "";
+
+    data.forEach(book=>{
+
+        box.innerHTML += `
+            <div
+                class="autocomplete-item"
+                onclick="pilihBuku(${book.id})">
+
                 ${book.title}
-            </option>
+
+            </div>
         `;
 
     });
+
+    box.style.display="block";
+
+}
+
+function pilihBuku(id){
+
+    const book = books.find(b => b.id === id);
+
+    selectedBookId = id;
+
+    document.getElementById("bookSearch").value = book.title;
+
+    document.getElementById("bookResult").style.display = "none";
+
+}
+
+function chooseBook(id){
+
+    selectedBook =
+        books.find(book=>book.id===id);
+
+    document.getElementById("bookSearch").value =
+        selectedBook.title;
+
+    document.getElementById("bookResult").style.display =
+        "none";
+
+    renderSelectedBook();
+
+}
+function renderSelectedBook(){
+
+    const tbody =
+        document.getElementById("loanBookBody");
+
+    tbody.innerHTML = `
+
+    <tr>
+
+        <td>${selectedBook.title}</td>
+
+        <td>${selectedBook.categoryName}</td>
+
+        <td>${selectedBook.stock}</td>
+
+        <td>
+
+            <button
+                class="delete-btn"
+                onclick="removeSelectedBook()">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+
+        </td>
+
+    </tr>
+
+    `;
+
+    document.getElementById("totalBook").innerHTML = 1;
+
+}
+function removeSelectedBook(){
+
+    selectedBook = null;
+
+    document.getElementById("bookSearch").value = "";
+
+    document.getElementById("loanBookBody").innerHTML = "";
+
+    document.getElementById("totalBook").innerHTML = 0;
 
 }
 
@@ -94,23 +334,31 @@ async function loadBooks() {
 // Tambah Buku
 // ===================================
 
-function addBook() {
+function addBook(){
 
-    const select = document.getElementById("bookSelect");
+    const id = selectedBookId;
 
-    const id = Number(select.value);
+    if(!id){
 
-    if (!id) {
         alert("Pilih buku.");
+
         return;
+
     }
 
-    if (selectedBooks.includes(id)) {
+    if(selectedBooks.includes(id)){
+
         alert("Buku sudah dipilih.");
+
         return;
+
     }
 
     selectedBooks.push(id);
+
+    selectedBookId = null;
+
+    document.getElementById("bookSearch").value = "";
 
     renderBooks();
 
@@ -187,33 +435,36 @@ function removeBook(id) {
 
 async function saveLoan() {
 
+if(selectedMember == null){
+
+    alert("Pilih anggota.");
+
+    return;
+
+}
+
+const memberId = selectedMember.id;
+
+    if (selectedBooks.length === 0) {
+
+        alert("Tambahkan minimal satu buku.");
+        return;
+
+    }
+
     const loan = {
 
-        memberId: Number(document.getElementById("memberSelect").value),
+        memberId: memberId,
 
-        bookId: Number(document.getElementById("bookSelect").value),
+        bookIds: selectedBooks,
 
-        loanDate: document.getElementById("loanDate").value,
+        loanDate:
+            document.getElementById("loanDate").value,
 
-        dueDate: document.getElementById("dueDate").value
+        dueDate:
+            document.getElementById("dueDate").value
 
     };
-
-    if (!loan.memberId) {
-
-        alert("Pilih anggota.");
-
-        return;
-
-    }
-
-    if (!loan.bookId) {
-
-        alert("Pilih buku.");
-
-        return;
-
-    }
 
     const result = await createLoan(loan);
 
@@ -236,37 +487,33 @@ async function saveLoan() {
 // showMemberInfo
 // ===================================
 
-function showMemberInfo() {
+function showMemberInfo(){
 
-    const memberId =
-        Number(document.getElementById("memberSelect").value);
+    if(!selectedMember) return;
 
-    const member =
-        members.find(m => m.id === memberId);
+    document.getElementById("memberName").innerHTML =
+        selectedMember.fullName;
 
-    if (!member) return;
+    document.getElementById("memberNim").innerHTML =
+        selectedMember.nim;
 
-    document.getElementById("memberName").textContent =
-        member.fullName;
-
-    document.getElementById("memberNim").textContent =
-        member.nim;
-
-    document.getElementById("memberStudy").textContent =
-        member.studyProgram;
+    document.getElementById("memberStudy").innerHTML =
+        selectedMember.studyProgram;
 
     const status =
         document.getElementById("memberStatus");
 
-    if (member.active) {
+    if(selectedMember.active){
 
-        status.textContent = "Aktif";
-        status.className = "badge success";
+        status.innerHTML="Aktif";
 
-    } else {
+        status.className="badge success";
 
-        status.textContent = "Non Aktif";
-        status.className = "badge danger";
+    }else{
+
+        status.innerHTML="Non Aktif";
+
+        status.className="badge danger";
 
     }
 

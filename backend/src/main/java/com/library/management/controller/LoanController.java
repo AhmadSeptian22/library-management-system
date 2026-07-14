@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -54,17 +55,17 @@ public class LoanController {
     // ==========================
     // CREATE
     // ==========================
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<LoanResponse> createLoan(
-            @Valid @RequestBody LoanRequest request) {
+@PostMapping
+@ResponseStatus(HttpStatus.CREATED)
+public ApiResponse<List<LoanResponse>> createLoan(
+        @Valid @RequestBody LoanRequest request) {
 
-        return new ApiResponse<>(
-                true,
-                "Peminjaman berhasil dibuat",
-                loanService.createLoan(request)
-        );
-    }
+    return new ApiResponse<>(
+            true,
+            "Peminjaman berhasil dibuat",
+            loanService.createLoan(request)
+    );
+}
 
     // ==========================
     // RETURN BOOK
@@ -108,5 +109,18 @@ public ApiResponse<Page<LoanResponse>> searchLoan(
                 loanService.searchLoan(keyword, pageable)
         );
     }
+
+ @GetMapping("/late")
+public ApiResponse<List<LoanResponse>> getLateLoans() {
+
+    return new ApiResponse<>(
+
+            true,
+            "Data keterlambatan berhasil diambil",
+            loanService.getLateLoans()
+
+    );
+
+}
 
 }

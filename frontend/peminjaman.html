@@ -144,7 +144,7 @@ Logout
 
 <h4>Administrator</h4>
 
-<span>Admin Perpustakaan</span>
+<span>Perpustakaan</span>
 
 </div>
 
@@ -170,13 +170,24 @@ Identitas Anggota
 
 <div class="form-group">
 
-    <label>Pilih Anggota</label>
+<label>Cari Anggota</label>
 
-    <select id="memberSelect">
+<div class="search-wrapper">
 
-        <option value="">-- Pilih Anggota --</option>
+    <input
+        type="text"
+        id="memberSearch"
+        class="form-control"
+        placeholder="Cari Nama atau NIM Anggota..."
+        autocomplete="off"
+    >
 
-    </select>
+    <div
+        id="memberResult"
+        class="autocomplete-list">
+    </div>
+
+</div>
 
 </div>
 
@@ -224,21 +235,19 @@ Identitas Anggota
 
 <div class="report-card">
 
-<h3>
-    <i class="fa-solid fa-book"></i>
-    Daftar Buku yang Dipinjam
-</h3>
-
 <div class="form-group">
 
     <label>Pilih Buku</label>
 
-    <select id="bookSelect">
+    <input
+    type="text"
+    id="bookSearch"
+    placeholder="Cari Judul Buku..."
+    autocomplete="off">
 
-        <option value="">-- Pilih Buku --</option>
-
-    </select>
-
+<div
+    id="bookResult"
+    class="autocomplete-list">
 </div>
 
 <button
@@ -251,7 +260,8 @@ Identitas Anggota
 
 </button>
 
-<br><br>
+<br>
+<br>
 
 <table>
 
@@ -276,13 +286,6 @@ Identitas Anggota
 
 </table>
 
-<br>
-
-<button class="btn-success">
-
-<i class="fa-solid fa-barcode"></i>
-
-Scan Barcode Buku
 
 </button>
 
@@ -330,22 +333,6 @@ Ringkasan Transaksi
 
 <div class="summary-item">
 
-<label>Status Anggota</label>
-
-<p>
-
-<span class="badge success">
-
-Tidak Memiliki Denda
-
-</span>
-
-</p>
-
-</div>
-
-<div class="summary-item">
-
 <label>Keterangan</label>
 
 <textarea rows="4"
@@ -362,26 +349,14 @@ onclick="saveLoan()">
 
 Proses Peminjaman
 
-</button>
-
-<i class="fa-solid fa-xmark"></i>
-
-Batalkan
-
-</button>
-
 </div>
-
-</div>
-
-</div>
-
-<!-- ================= PANDUAN ================= -->
+<br>
 
 <div class="table-card">
-
-<div class="table-header">
-
+    
+    <div class="table-header">
+        
+<!-- ================= PANDUAN ================= -->
 <h2>
 
 <i class="fa-solid fa-circle-info"></i>
@@ -427,7 +402,6 @@ Panduan Peminjaman
 <p>Pastikan stok buku tersedia sebelum dipinjamkan.</p>
 
 </div>
-
 </div>
 
 <div class="guide-item">
@@ -440,14 +414,13 @@ Panduan Peminjaman
 
 <div>
 
-<h4>Periksa Barcode</h4>
+<h4>Anggota</h4>
 
-<p>Gunakan tombol Scan Barcode untuk mempercepat input buku.</p>
-
-</div>
+<p>hanya dapat meminjam buku maksimal 3 buku dalam 1 kali peminjaman.</p>
 
 </div>
 
+</div>
 <div class="guide-item">
 
 <div class="guide-icon">
@@ -472,53 +445,7 @@ Panduan Peminjaman
 
 </main>
 
-</div>
-<!-- ================= MODAL TAMBAH BUKU ================= -->
 
-<div id="bookModal" class="modal">
-
-    <div class="modal-content">
-
-        <span class="close">&times;</span>
-
-        <h2>Tambah Buku</h2>
-
-        <br>
-
-        <label>Judul Buku</label>
-
-        <input
-            type="text"
-            id="judulBuku"
-            placeholder="Masukkan Judul Buku">
-
-        <br><br>
-
-        <label>Kategori</label>
-
-        <input
-            type="text"
-            id="kategoriBuku"
-            placeholder="Kategori">
-
-        <br><br>
-
-        <label>Kode Rak</label>
-
-        <input
-            type="text"
-            id="rakBuku"
-            placeholder="Contoh A-01">
-
-        <br><br>
-
-        <button id="saveBook" class="btn-primary">
-            Tambah
-        </button>
-
-    </div>
-
-</div>
 
 <script src="js/api.js"></script>
 <script src="js/loan.js"></script>
